@@ -4,14 +4,14 @@ import img_logo from "../../assets/logo/logo-hands-small.svg"
 import { useState } from "react"
 import NavbarButton from "./NavbarButton"
 
-export default function Navbar() {
+export default function Navbar({links}) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const links = [
-    { to: "/nosotros", text: "Sobre nosotros" },
-    { to: "/calculate", text: "Calcula tu envío" },
-    { to: "https://lamess.lobolink.eu/lobo/#!//coreLogin/", text: "Zona clientes" },
-  ]
+  // const links = [
+  //   { to: "/nosotros", text: "Sobre nosotros" },
+  //   { to: "/calculate", text: "Calcula tu envío" },
+  //   { to: "https://lamess.lobolink.eu/lobo/#!//coreLogin/", text: "Zona clientes" },
+  // ]
 
   return (
     <>
