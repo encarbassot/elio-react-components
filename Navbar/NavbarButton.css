@@ -1,0 +1,58 @@
+:root {
+  --btn-size: 50px;
+  --burger-width: calc(0.625*var(--btn-size));
+  --burger-line-height: calc(var(--btn-size)*0.075);
+  --burger-line-spacing: calc(var(--burger-width) * 0.32);
+}
+
+.menu-btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--btn-size);
+  height: var(--btn-size);
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.menu-btn_burger::before,
+.menu-btn_burger::after,
+.menu-btn_burger {
+  width: var(--burger-width);
+  height: var(--burger-line-height);
+  background-color: rgb(0, 0, 0);
+  border-radius: 5px;
+
+  box-shadow: 0 2px 5px rgba(255, 201, 47, .2);
+  transition: all .2s ease-in-out;
+}
+
+.menu-btn_burger::before,
+.menu-btn_burger::after {
+  content: '';
+  position: absolute;
+}
+
+.menu-btn_burger::before {
+  transform: translateY(calc(-1*var(--burger-line-spacing)));
+}
+
+.menu-btn_burger::after {
+  transform: translateY(var(--burger-line-spacing));
+}
+
+.menu-btn.open .menu-btn_burger {
+  transform: translateX(calc(-1*var(--burger-width)));
+  background: transparent;
+  box-shadow: none;
+}
+
+.menu-btn.open .menu-btn_burger::before {
+  transform: translateX(var(--burger-width)) rotate(45deg);
+}
+
+.menu-btn.open .menu-btn_burger::after {
+  transform: translateX(var(--burger-width)) rotate(-45deg);
+
+}
