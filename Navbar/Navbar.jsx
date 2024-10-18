@@ -1,10 +1,9 @@
   import "./Navbar.css"
 import { Link } from "react-router-dom"
-import img_logo from "../../assets/logo/logo-hands-small.svg"
 import { useState } from "react"
 import NavbarButton from "./NavbarButton"
 
-export default function Navbar({links}) {
+export default function Navbar({links,logo}) {
   const [isOpen, setIsOpen] = useState(false)
 
   // const links = [
@@ -21,7 +20,7 @@ export default function Navbar({links}) {
           <div className="Navbar__content">
 
             <Link to="/" >
-              <img src={img_logo} alt=""  className="logo"/>
+              <img src={logo} alt=""  className="logo"/>
             </Link>
 
             <div className="landscapeLinks">
