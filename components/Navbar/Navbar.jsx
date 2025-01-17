@@ -14,7 +14,7 @@ export default function Navbar({links,logo}) {
 
   return (
     <>
-      <nav className={"Navbar" + (isOpen ? " open" : "")}>
+      <nav className={"elio-react-components Navbar" + (isOpen ? " open" : "")}>
 
         <div className="Navbar__wrapper">
           <div className="Navbar__content">

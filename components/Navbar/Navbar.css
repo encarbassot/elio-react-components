@@ -1,4 +1,4 @@
-.Navbar {
+.elio-react-components.Navbar {
   display: flex;
   justify-content: center;
 
@@ -33,7 +33,7 @@
   }
 }
 
-.Navbar a {
+.elio-react-components.Navbar a {
   color: black;
   height: 100%;
   display: flex;
@@ -41,18 +41,18 @@
   font-size: 20px;
 }
 
-.Navbar a:hover {
+.elio-react-components.Navbar a:hover {
   color: black;
   text-decoration: underline;
 }
 
 
-.Navbar img {
+.elio-react-components.Navbar img {
   max-height: 100%;
 }
 
 
-.Navbar__wrapper {
+.elio-react-components.Navbar .Navbar__wrapper {
   height: 100%;
   width: 100%;
   max-width: var(--max-width);
@@ -66,12 +66,12 @@
 }
 
 
-.Navbar .landscapeLinks {
+.elio-react-components.Navbar .landscapeLinks {
   display: flex;
   gap: 1.5rem;
 }
 
-.Navbar__content {
+.elio-react-components.Navbar .Navbar__content {
   height: 100%;
   padding: 5px 15px;
   flex: 1;
@@ -79,7 +79,7 @@
   justify-content: space-between;
 }
 
-.Navbar__content>* {
+.elio-react-components.Navbar .Navbar__content>* {
   height: 100%;
   display: flex;
   align-items: center;
@@ -113,7 +113,7 @@
 
 /* NAVBAR PHONE MENU */
 
-.Navbar__drop {
+.elio-react-components.Navbar__drop {
   position: fixed;
   top: 0;
   left: 0;
@@ -128,22 +128,22 @@
   backdrop-filter: blur(5px);
 }
 
-.Navbar__drop.open {
+.elio-react-components.Navbar__drop.open {
   opacity: 1;
   pointer-events: auto;
 }
 
-.Navbar.open img.logo {
+.elio-react-components.Navbar.open img.logo {
   filter: invert();
 }
 
-.Navbar.open .menu-btn_burger::before,
-.Navbar.open .menu-btn_burger::after,
-.Navbar.open .menu-btn_burger {
+.elio-react-components.Navbar.open .menu-btn_burger::before,
+.elio-react-components.Navbar.open .menu-btn_burger::after,
+.elio-react-components.Navbar.open .menu-btn_burger {
   background-color: white;
 }
 
-.Navbar__drop__wrapper {
+.elio-react-components.Navbar__drop__wrapper {
   width: 100%;
   position: absolute;
   top: 100%;
@@ -152,7 +152,7 @@
   z-index: 3000;
 }
 
-.Navbar__drop__content {
+.elio-react-components.Navbar__drop__content {
   border-radius: 5px;
   width: 100%;
   padding-left: .6rem;
@@ -165,51 +165,51 @@
   transition: opacity .3s ease;
 }
 
-.Navbar__drop__content a,
-.Navbar__drop__content a:hover {
+.elio-react-components.Navbar__drop__content a,
+.elio-react-components.Navbar__drop__content a:hover {
   color: white;
 }
 
-.Navbar__drop__content:not(.open) {
+.elio-react-components.Navbar__drop__content:not(.open) {
   opacity: 0;
   display: none;
 }
 
-.Navbar__drop__content>a {
+.elio-react-components.Navbar__drop__content>a {
   font-size: 32px;
   padding-top: 1rem;
   padding-bottom: 1rem;
   width: 100%;
 }
 
-.Navbar__drop__content>a:not(:last-child) {
+.elio-react-components.Navbar__drop__content>a:not(:last-child) {
   border-bottom: 1px solid white;
 }
 
 /* RESPONSIVE */
 
-.Navbar__drop__wrapper,
-.Navbar__button,
-.Navbar__drop {
+.elio-react-components.Navbar__drop__wrapper,
+.elio-react-components.Navbar__button,
+.elio-react-components.Navbar__drop {
   display: none;
 }
 
 @media (max-width: 768px) {
 
-  .Navbar__drop__wrapper,
-  .Navbar__button,
-  .Navbar__drop {
+  .elio-react-components.Navbar__drop__wrapper,
+  .elio-react-components.Navbar__button,
+  .elio-react-components.Navbar__drop {
     display: block;
   }
 
-  .Navbar .hideOnPhone {
+  .elio-react-components.Navbar .hideOnPhone {
     display: none;
   }
 }
 
 
 @media (min-width: 768px) {
-  .Navbar.open img.logo {
+  .elio-react-components.Navbar.open img.logo {
     filter: none;
   }
 
