@@ -1,0 +1,13 @@
+.elio-react-components.gloval__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 20;
+}
+
+/* clase de react dimmer */
+.dimmer-active {
+    background: rgba(200, 200, 200, 0.75) !important;
+}

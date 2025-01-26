@@ -1,0 +1,110 @@
+/* SPARTAN */
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-Thin.ttf");
+  font-weight: 100 199;
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-ExtraLight.ttf");
+  font-weight: 200 299;
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-Light.ttf");
+  font-weight: 300 399;
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-Regular.ttf");
+  font-weight: 400 499;
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-Medium.ttf");
+  font-weight: 500 599;
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-SemiBold.ttf");
+  font-weight: 600 699;
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-Bold.ttf");
+  font-weight: 700 799;
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-ExtraBold.ttf");
+  font-weight: 800 899;
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("../assets/fonts/Spartan/Spartan-Black.ttf");
+  font-weight: 900 999;
+}
+
+
+/* MONTSERRAT */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-Thin.ttf");
+  font-weight: 100 199;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-ExtraLight.ttf");
+  font-weight: 200 299;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-Light.ttf");
+  font-weight: 300 399;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-Regular.ttf");
+  font-weight: 400 499;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-Medium.ttf");
+  font-weight: 500 599;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-SemiBold.ttf");
+  font-weight: 600 699;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-Bold.ttf");
+  font-weight: 700 799;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-ExtraBold.ttf");
+  font-weight: 800 899;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat/Montserrat-Black.ttf");
+  font-weight: 900 999;
+}

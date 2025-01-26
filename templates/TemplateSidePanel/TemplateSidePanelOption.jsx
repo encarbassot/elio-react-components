@@ -29,7 +29,6 @@ export default function SidePanelOption({ico,text,href,expanded,onClick, options
   }
 
 
-  console.log(text, options )
   return(<>
 
     <div 
@@ -43,7 +42,7 @@ export default function SidePanelOption({ico,text,href,expanded,onClick, options
 
     </div>
 
-    {options &&
+    {options && options.length>0 &&
     
       <div className={(expanded && pathname.startsWith(href) ) ? "Sidepanel__option__options": "Sidepanel__option__options--hide"}>
         

@@ -14,13 +14,19 @@
 
 }
 
+.elio-react-components.Template__SidePanel>main {
+
+  flex: 1;
+
+}
+
 /* ------------------------------ SIDEPANEL ------------------------------ */
 
 
 .elio-react-components.Template__SidePanel .Sidepanel {
   width: 85px;
   min-width: 85px;
-  height: 100vh;
+  height: 100dvh;
   z-index: 15;
   border-right: 1px solid rgba(51, 51, 51, 0.2);
   display: flex;
@@ -32,6 +38,11 @@
 
   background-color: white;
   color: #333;
+
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+
+
 }
 
 .elio-react-components.Template__SidePanel .Sidepanel.extended {
@@ -65,9 +76,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 80vh;
   gap: 2.2rem;
-  min-height: 660px;
+  /* height: 80vh;
+  min-height: 660px; */
 }
 
 
@@ -81,7 +92,6 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  padding-bottom: 2rem;
 }
 
 .elio-react-components.Template__SidePanel .Sidepanel__version {
@@ -327,4 +337,28 @@
 
 .elio-react-components.Template__SidePanel .Sidepanel__subOption.selected {
   opacity: 1;
+}
+
+
+
+/* ------------------------------ PHONE RESPONSIVE ------------------------------ */
+@media (max-width: 768px) {
+  .elio-react-components.Template__SidePanel .Sidepanel {
+
+    width: 50px;
+    min-width: 50px;
+  }
+
+  .elio-react-components.Template__SidePanel .Sidepanel__option {
+    padding-left: 15px;
+  }
+
+  .elio-react-components.Template__SidePanel .Sidepanel__option__icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .elio-react-components.Template__SidePanel .Sidepanel__version {
+    display: none;
+  }
 }

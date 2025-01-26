@@ -1,0 +1,162 @@
+/* ------------------ INPUT ELEMENT ------------------ */
+/* its the absolute wrapper */
+.elio-react-components.Inputs .input__base,
+.elio-react-components.Inputs.input__base {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+}
+
+.elio-react-components.Inputs .input__base__row,
+.elio-react-components.Inputs.input__base__row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ------------------ TITLE ------------------ */
+
+.elio-react-components.Inputs .input__title {
+  font-weight: 400;
+  color: var(--primary);
+  margin: 0;
+}
+
+/* ------------------ INPUT CONTAINER ------------------ */
+/* wraps the  ( "icon" / (input,error) ) */
+.elio-react-components.Inputs .input__container {
+  display: flex;
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+
+
+/* ------------------ INPUT FIELD WRAPPER ------------------ */
+/* wraps verticaly the (input / error) */
+
+.elio-react-components.Inputs .input__fieldWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.elio-react-components.Inputs .input__fieldWrapper>input,
+.elio-react-components.Inputs .input__fieldWrapper>.input__combinedInput {
+  border: 0;
+  border-bottom: 0.1rem solid var(--primary) !important;
+  font-size: 1rem;
+  opacity: 0.75;
+  width: 100%;
+  /* padding-left: 0.5rem; */
+}
+
+
+
+/* ------------------ INPUT ELEMENT ------------------ */
+
+.elio-react-components .input__element {
+  width: 100%;
+  height: 2rem;
+  border: 0;
+
+  font-family: var(--text-font);
+  font-weight: 300;
+  outline: none;
+
+}
+
+.elio-react-components.Inputs input {
+  outline: none;
+  width: 100%;
+}
+
+.elio-react-components.Inputs .input__combinedInput {
+  display: flex;
+  border-bottom: 0.1rem solid #f9f9f9c2;
+}
+
+
+.elio-react-components.Inputs .inputLogin::selection {
+  background-color: #00b6ce !important;
+  color: white !important;
+}
+
+/* TEXT SELECTION COLORED */
+.elio-react-components.Inputs input::selection {
+  background: var(--white);
+}
+
+/* INPUT FOCUS  */
+.elio-react-components.Inputs .input__fieldWrapper>input:focus,
+.elio-react-components.Inputs .input__fieldWrapper>.input__combinedInput:focus-within {
+  border-bottom: 0.1rem solid;
+}
+
+
+/* ------------------ ERROR ------------------ */
+
+.elio-react-components.Inputs .input__combinedInput.password.error,
+.elio-react-components.Inputs .inputLogin.error,
+.elio-react-components.Inputs .inputLogin.password.error {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.elio-react-components.Inputs .input__fieldWrapper>.inputLogin.error:focus,
+.elio-react-components.Inputs .input__fieldWrapper>.inputLogin.password.error:focus-within {
+  border-bottom: 2px solid var(--red);
+}
+
+.elio-react-components.Inputs .inputLogin.error::placeholder,
+.elio-react-components.Inputs .inputLogin.password.error::placeholder {
+  color: #a33d3d;
+}
+
+.elio-react-components.Inputs .input__eye.password.error,
+.elio-react-components.Inputs .input__icon.error,
+.elio-react-components.Inputs .input__icon.password.error {
+  /* filter: invert(30%) sepia(71%) saturate(7224%) hue-rotate(355deg) brightness(89%) contrast(133%); */
+
+  filter: invert(40%) sepia(100%) saturate(7000%) hue-rotate(355deg) brightness(90%) contrast(200%);
+}
+
+.elio-react-components.Inputs .messageError {
+  flex-wrap: nowrap;
+  position: absolute;
+  /* margin-top: 0.5rem; */
+  top: 100%;
+  color: var(--red);
+  font-size: 14px;
+  font-family: var(--text-font), sans-serif;
+  font-weight: 600;
+  opacity: 0.75;
+  padding-left: 0.5rem;
+}
+
+
+
+/* PASSWORD
+
+.elio-react-components.Inputs .input__eye,
+.elio-react-components.Inputs .input__icon {
+  opacity: 0.9;
+  height: 32px;
+  width: 32px;
+  object-fit: contain;
+}
+
+.elio-react-components.Inputs .input__eye {
+  height: 23px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.elio-react-components.Inputs .input__eye:hover {
+  opacity: 0.9;
+}
+
+*/

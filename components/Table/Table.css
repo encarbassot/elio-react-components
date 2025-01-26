@@ -1,0 +1,87 @@
+.elio-react-components.Table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+.elio-react-components.Table tr {}
+
+.elio-react-components.Table tr:hover {
+  background-color: #ddd;
+}
+
+.elio-react-components.Table th,
+.elio-react-components.Table td {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+  text-align: left;
+
+}
+
+/* .elio-react-components.Table th span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+
+} */
+
+.elio-react-components.Table th {
+
+  background-color: #f2f2f2;
+
+  border-bottom: 1px solid black;
+
+  /* NO TEXT SELECTION */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+.elio-react-components.Table tbody {
+  background-color: white;
+}
+
+.elio-react-components.Table .Table__header.resize {
+  cursor: ew-resize;
+
+}
+
+.elio-react-components.Table .Table__data__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.elio-react-components.Table .Table__data__actions button {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+}
+
+.elio-react-components.Table .Table__data__actions button>* {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+.elio-react-components.Table .sortingIco {
+  width: 10px;
+  height: 10px;
+}
+
+.elio-react-components.Table .Table__header__container {
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
