@@ -78,6 +78,7 @@
     justify-content: center;
 }
 
+.elio-react-components.textModal .textModal__button.loading,
 .elio-react-components.textModal .textModal__button:hover {
     color: #fff;
     background-color: #333;

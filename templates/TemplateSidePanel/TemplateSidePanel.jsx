@@ -7,10 +7,17 @@ import iconContraer from "../../assets/icons/contract.svg"
 import { useLocalStorage } from '../../hooks';
 import SidePanelOption from './TemplateSidePanelOption';
 import { Link } from 'react-router-dom';
-import ExpandingLogo from '../../../components/ExpandingLogo/ExpandingLogo';
 
 
-export default function SidePanel({children, options = [], footerOptions = [], version}) {
+export default function SidePanel({
+  children,
+  options = [],
+  footerOptions = [],
+  version,
+  logo,
+  bottom=null,
+  phoneNavbarBottom = false
+}) {
 
 
   const [expanded,setExpanded] = useLocalStorage("sidebar-expansioin",false)
@@ -23,7 +30,7 @@ export default function SidePanel({children, options = [], footerOptions = [], v
       <div className={"Sidepanel "+(expanded ? "extended" : "")} >
         <nav className={'Sidepanel__list'}>
           <Link to="/">
-            <ExpandingLogo expanded={!expanded}/>
+            {logo}
           </Link>
 
 
@@ -78,6 +85,9 @@ export default function SidePanel({children, options = [], footerOptions = [], v
           />
           
           {version && <span className='Sidepanel__version'>{version}</span>}
+
+
+          {bottom}
         </footer>
       </div>
 
