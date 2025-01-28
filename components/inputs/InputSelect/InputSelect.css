@@ -1,4 +1,18 @@
 .elio-react-components.InputSelect {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 3px;
+}
+
+
+.elio-react-components.InputSelect .InputSelect__title {
+  font-weight: 400;
+  color: var(--primary);
+  margin: 0;
+}
+
+.elio-react-components.InputSelect .InputSelect__container {
 
   position: relative;
   font-size: 12px;

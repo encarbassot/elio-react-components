@@ -2,7 +2,7 @@ import "./InputSelect.css"
 import { useEffect, useRef, useState } from "react"
 import dropdownIco from "../../../assets/icons/triangleDown.svg"
 
-export function InputSelect({options,onChange,value,wide=false,...props}){
+export function InputSelect({options,onChange,value,wide=false,title,...props}){
 
   const [isOpen,setIsOpen] = useState(false)
   const [selected,setSelected] = useState(value || options[0])
@@ -37,28 +37,34 @@ export function InputSelect({options,onChange,value,wide=false,...props}){
 
   return (<>
     <div className="elio-react-components InputSelect" ref={dropdownRef} {...props}>
-
-      <div className="InputSelect__selected"
-        onClick={()=>setIsOpen(!isOpen)}
-      >
-        <span>{selected}</span>
-        <img className={"InputSelect__dropdown" + (isOpen?" open":"")} src={dropdownIco} alt="" />
-      </div>
-      {isOpen &&
-        <div className="InputSelect__wrapper">
-          
-            <div className="InputSelect__items">
-              {options.map((op,i)=>
-                <p
-                  key={i}
-                  className={"InputSelect__items__item" + (op===selected?" active":"")}
-                  onClick={()=>handleSelect(op)}
-                >{op}</p>
-              )}
-            </div>
-        
-        </div>
+      {
+        title &&
+        <p className='InputSelect__title'>{title}</p>
       }
+
+      <div className="InputSelect__container">
+        <div className="InputSelect__selected"
+          onClick={()=>setIsOpen(!isOpen)}
+        >
+          <span>{selected}</span>
+          <img className={"InputSelect__dropdown" + (isOpen?" open":"")} src={dropdownIco} alt="" />
+        </div>
+        {isOpen &&
+          <div className="InputSelect__wrapper">
+            
+              <div className="InputSelect__items">
+                {options.map((op,i)=>
+                  <p
+                    key={i}
+                    className={"InputSelect__items__item" + (op===selected?" active":"")}
+                    onClick={()=>handleSelect(op)}
+                  >{op}</p>
+                )}
+              </div>
+          
+          </div>
+        }
+      </div>
     </div>
   </>)
 }
