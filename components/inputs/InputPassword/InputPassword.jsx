@@ -8,7 +8,7 @@ import "../inputs.css"
 // import "./InputPassword.css" 
 
 //export default
-export const  InputPassword = forwardRef(({icon,error,value,onChange,title,...props},ref)=>{
+export const  InputPassword = forwardRef(({icon,error,value,onChange,title,onEnter, onKeyDown,...props},ref)=>{
     const [visible,setVisible] = useState(false)
     const [isCapsLockActive,setIsCapsLockActive] = useState(false)
   
@@ -47,6 +47,14 @@ export const  InputPassword = forwardRef(({icon,error,value,onChange,title,...pr
       setVisible((prev)=>!prev)
       inpRef.current?.focus()
     }
+
+
+    function handleOnEnter(event){
+
+      if(onkeydown) onKeyDown(event)
+  
+      if(onEnter && event.key === "Enter") onEnter()
+    }
   
     return(
       <div className='elio-react-components Inputs input__base'>
@@ -68,6 +76,7 @@ export const  InputPassword = forwardRef(({icon,error,value,onChange,title,...pr
                 value={value}
                 onChange={onChange}
                 placeholder={visible ? "CONTRASEÑA VISIBLE" : "CONTRASEÑA"}
+                onKeyDown={handleOnEnter}
                 {...props}
               />
               <img

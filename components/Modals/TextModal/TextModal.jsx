@@ -45,7 +45,7 @@ export function TextModal({
 
           <div className="elio-react-components textModal" onClick={e=>handleClickInside(e)}>
 
-          {title &&
+          {(title || setIsOpen) &&
             <header className="textModal__header">
               <h2 className="textModal__text">{title}</h2>
               {setIsOpen&&

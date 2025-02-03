@@ -4,7 +4,7 @@ import React, {  forwardRef, useRef, useImperativeHandle } from 'react'
 
 
 
-export const InputText = forwardRef(({icon,alt,error,value,onChange,placeholder,title,typeNumber=false,...props},ref) => {
+export const InputText = forwardRef(({icon,alt,error,value,onChange,placeholder,title,typeNumber=false,onEnter, onKeyDown,...props},ref) => {
   const inpRef = useRef(null);
   
   //seleccionar el campo, con el cursor al final
@@ -21,6 +21,14 @@ export const InputText = forwardRef(({icon,alt,error,value,onChange,placeholder,
   function _onChange(e){
     // TODO if (key === "Enter" && onEnter) onEnter(e)
     onChange && onChange(e)
+  }
+
+  function handleOnEnter(event){
+
+    if(onkeydown) onKeyDown(event)
+
+
+    if(onEnter && event.key === "Enter") onEnter()
   }
 
   return (
@@ -43,6 +51,7 @@ export const InputText = forwardRef(({icon,alt,error,value,onChange,placeholder,
           value={value}
           onChange={_onChange}
           placeholder={placeholder}
+          onKeyDown={handleOnEnter}
           {...props}
           />
         {error &&

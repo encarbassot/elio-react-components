@@ -1,0 +1,213 @@
+.calendar {
+  /* --detail-color: #ad4d4d; */
+  --detail-color: transparent;
+  --background: transparent;
+  --text-color: rgba(37, 37, 37, 0.6);
+  --text-color-active: #000000;
+  --text-color-muted: rgba(102, 102, 102, 0.3);
+
+}
+
+
+.calendar {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+  /* 
+    box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -225px;
+    margin-left: -195px; */
+  width: 360px;
+  height: 470px;
+  padding: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--background);
+
+  z-index: 30;
+
+}
+
+.calendar--nav {
+  margin: -15px -15px 15px;
+  padding: 0 15px;
+  background-color: var(--detail-color);
+  color: var(--text-color-active);
+  height: 70px;
+  position: relative;
+}
+
+.calendar--nav a {
+  position: absolute;
+  cursor: pointer;
+  left: 10px;
+  font-size: 32px;
+  line-height: 1;
+  top: 16px;
+  width: 30px;
+  text-align: center;
+  display: inline-block;
+  color: var(--text-color);
+  user-select: none;
+}
+
+.calendar--nav a:hover {
+  color: var(--text-color-active)
+}
+
+.calendar--nav a:last-child {
+  left: auto;
+  right: 10px;
+}
+
+.calendar--nav h1 {
+  margin: 0;
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 66px;
+  user-select: none;
+  text-transform: capitalize;
+}
+
+.calendar--nav small {
+  margin-left: 1rem;
+  font-weight: 300;
+  font-size: 60%;
+}
+
+.calendar--days {
+  font-size: 0;
+}
+
+.calendar--days span {
+  width: 14.28571%;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  margin: 8px 0;
+  line-height: 34px;
+  position: relative;
+  font-size: 16px;
+
+  border: 1px solid transparent;
+}
+
+/* DOMINGOS */
+.calendar--days span:nth-child(7n) {
+  color: red;
+}
+
+/* LUN MAR MIER JUE VIE ASB DOM */
+.calendar--days span.label {
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.6;
+  font-size: 14px;
+  cursor: initial;
+}
+
+.calendar--days span.active {
+  font-weight: 700;
+  /* background-color: rgba(182, 112, 244, 0.95); */
+  border-radius: 12px;
+}
+
+.calendar--days span.muted {
+  /* color: var(--text-color-muted); */
+  opacity: 0.5;
+}
+
+.calendar--days span.between {
+  border-radius: 0;
+}
+
+
+
+
+.calendar--days span.start,
+.calendar--days span.between,
+.calendar--days span.end {
+  background-color: var(--detail-color);
+  color: var(--text-color-active);
+  border-bottom: 1px solid var(--text-color-active);
+  ;
+}
+
+.calendar--days span.start {
+  border-radius: 12px 0 0 12px;
+}
+
+.calendar--days span.end {
+  border-radius: 0 12px 12px 0;
+}
+
+.calendar--days span.start.end {
+  border-radius: 0;
+  /* 12px;*/
+  font-weight: 500;
+}
+
+.calendar--days span.between:nth-child(7n):after,
+.calendar--days span.start:nth-child(7n):after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  background-color: var(--detail-color);
+  width: 20px;
+}
+
+.calendar--days span.between:nth-child(7n + 1):after,
+.calendar--days span.end:nth-child(7n + 1):after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  background-color: var(--detail-color);
+  width: 20px;
+}
+
+.calendar--days span.start.end:after {
+  display: none;
+}
+
+
+
+
+
+
+
+.calendar--months {
+  font-size: 0;
+}
+
+.calendar--months span {
+  width: 30%;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  margin: 8px 0;
+  line-height: 34px;
+  position: relative;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+
+
+.calendar--months span.active {
+  font-weight: 700;
+  background-color: var(--detail-color);
+  border-radius: 12px;
+}

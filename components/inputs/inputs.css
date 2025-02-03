@@ -87,7 +87,7 @@
 
 /* TEXT SELECTION COLORED */
 .elio-react-components.Inputs input::selection {
-  background: var(--white);
+  /* background: var(--white); */
 }
 
 /* INPUT FOCUS  */

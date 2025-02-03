@@ -1,0 +1,46 @@
+.HintIco{
+  position: relative;
+  display: inline;
+
+  cursor: help;
+
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.HintIco b{
+  font-weight: 600;
+}
+
+
+.HintIco__ico{
+  width: 12px;
+  height: 12px;
+
+  display: inline;
+}
+
+.HintIco__hint{
+  display: none;
+  position: absolute;
+  background-color: #3337;
+  backdrop-filter: blur(10px);
+  
+  color: white;
+  padding: 1rem;
+
+  bottom: 10px;
+  left: 0%;
+
+  min-width: 300px;
+
+  border-radius: 10px;
+}
+
+.HintIco:hover .HintIco__hint{
+  display:block;
+}
+
+.HintIco__hint p:not(:last-child){
+  margin-bottom: 1rem;
+}

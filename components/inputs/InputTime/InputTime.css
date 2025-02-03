@@ -1,0 +1,145 @@
+.elio-react-components.inputTime {
+  --selected--bg: #9a9a9abf;
+  --selected--color: #fff;
+}
+
+.elio-react-components.inputTime .input--text {
+  position: static;
+}
+
+.elio-react-components.inputTime {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 500px;
+  padding: 1rem 0;
+}
+
+.elio-react-components.inputTime .inputTime__timeContainer,
+.elio-react-components.inputTime .inputTime__row--input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.elio-react-components.inputTime .inputTime__row--input {
+  gap: 1rem;
+}
+
+.elio-react-components.inputTime .inputTime__row--actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.elio-react-components.inputTime .inputTime__input--minutes,
+.elio-react-components.inputTime .inputTime__input--hours {
+  /* background-color: #333; */
+
+  outline: none;
+  aspect-ratio: 1/1;
+  width: 104px;
+  border-radius: 10px;
+
+  text-align: center;
+
+
+  font-size: 62px !important;
+
+  caret-color: transparent;
+  cursor: pointer;
+
+  transition: background-color .2s ease .09s, color .2s ease .09s;
+}
+
+.elio-react-components.inputTime .inputTime__input--minutes::selection,
+.elio-react-components.inputTime .inputTime__input--hours::selection {
+  background-color: transparent;
+  color: var(--selected--color);
+}
+
+.elio-react-components.inputTime .inputTime__input--minutes:focus,
+.elio-react-components.inputTime .inputTime__input--hours:focus {
+  color: var(--selected--color);
+  background-color: var(--selected--bg);
+
+}
+
+/* : two dots betwen HH:MM */
+.elio-react-components.inputTime .inputTime__spacer {
+  font-weight: 350;
+  font-size: 32px;
+  font-family: "Korataki Book", sans-serif;
+
+}
+
+.elio-react-components.inputTime .inputTime__buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+
+.elio-react-components.inputTime .inputTime__button--down,
+.elio-react-components.inputTime .inputTime__button,
+.elio-react-components.inputTime .inputTime__action--cancel,
+.elio-react-components.inputTime .inputTime__action {
+  cursor: pointer;
+  outline: none;
+}
+
+.elio-react-components.inputTime .inputTime__action--cancel,
+.elio-react-components.inputTime .inputTime__action {
+  font-family: 'Montserrat';
+  font-size: 15px;
+  font-weight: 400;
+  color: #FFFFFFBF;
+  border: 2px solid #FFFFFFBF;
+  border-radius: 15px;
+  /* background-color: #333333BB; */
+  text-transform: uppercase;
+
+  /* animation: background-color 2s ease; */
+
+  padding: .25rem .75rem;
+}
+
+.elio-react-components.inputTime .inputTime__action--cancel:focus,
+.elio-react-components.inputTime .inputTime__action--cancel:hover {
+  background-color: #E30613BF;
+  color: #161616;
+}
+
+.elio-react-components.inputTime .inputTime__action:focus,
+.elio-react-components.inputTime .inputTime__action:hover {
+  /* background-color: #555555BB; */
+  /* filter: brightness(115%); */
+  background-color: #5e5e5e;
+  color: #161616;
+}
+
+.elio-react-components.inputTime .inputTime__action--cancel {
+  color: #E30613BF;
+  border-color: #E30613BF;
+}
+
+
+.elio-react-components.inputTime .inputTime__button--down,
+.elio-react-components.inputTime .inputTime__button {
+  padding: 1rem;
+  font-weight: 250;
+  font-size: 24px;
+}
+
+.elio-react-components.inputTime .inputTime__button--down {
+  transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+}

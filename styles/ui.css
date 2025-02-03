@@ -6,3 +6,12 @@
 .p-10 {
   padding: 10px;
 }
+
+.w-100 {
+  width: 100%;
+}
+
+
+.error {
+  color: #cc0000;
+}

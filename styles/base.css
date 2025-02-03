@@ -73,15 +73,28 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+  margin: 0;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+}
+
 p {
   margin: 0;
-  font-weight: 200;
+  font-family: "Montserrat", sans-serif;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 40px;
   line-height: 1.1;
+}
+
+h2 {
+  font-size: 35px;
+}
+
+h4 {
+  font-size: 24px;
 }
 
 button {
@@ -129,17 +142,19 @@ button {
 
 .button--red,
 .button {
+  padding: 0.6em 1.2em;
   background-color: black;
   color: white;
   border: 2px solid rgba(0, 0, 0, 0.209);
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); */
-  border-radius: 20px;
+  border-radius: 1000px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   transition: background-color .2s ease, color .2s ease;
+  /* width: 100%; */
 }
 
 .button:hover {
@@ -158,6 +173,12 @@ button {
 }
 
 
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 
 .center {
   display: flex;
@@ -167,7 +188,7 @@ button {
 }
 
 .container {
-  max-width: var(--max-width);
+  /* max-width: var(--max-width); */
   width: 100%;
 
   border: 1px solid rgba(0, 0, 0, 0.209);
@@ -196,6 +217,23 @@ button {
 }
 
 
+.spinner {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid white;
+  border-top: 3px solid transparent !important;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+.spinner--small.black,
+.spinner.black {
+  border-color: black;
+}
+
+
 input[type=text],
 input[type=password],
 input[type=number] {
@@ -203,6 +241,28 @@ input[type=number] {
   outline: none;
 }
 
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
 
 
