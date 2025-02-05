@@ -17,6 +17,7 @@
 .elio-react-components.Template__SidePanel>main {
 
   flex: 1;
+  overflow-y: auto;
 
 }
 
@@ -76,7 +77,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.2rem;
+  gap: 2rem;
   /* height: 80vh;
   min-height: 660px; */
 }
@@ -87,6 +88,7 @@
 
 
 .elio-react-components.Template__SidePanel .Sidepanel__footer {
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,8 +96,17 @@
   gap: 2rem;
 }
 
+@media (max-height: 800px) {
+
+  .elio-react-components.Template__SidePanel .Sidepanel__list,
+  .elio-react-components.Template__SidePanel .Sidepanel__footer {
+    gap: 1.4rem;
+  }
+
+}
+
 .elio-react-components.Template__SidePanel .Sidepanel__version {
-  font-size: 16px
+  font-size: 10px
 }
 
 
