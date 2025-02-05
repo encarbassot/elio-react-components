@@ -17,6 +17,7 @@
 .elio-react-components.Template__SidePanel>main {
 
   flex: 1;
+  max-height: 100dvh;
   overflow-y: auto;
 
 }
