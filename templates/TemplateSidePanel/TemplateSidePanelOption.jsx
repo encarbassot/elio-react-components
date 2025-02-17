@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom"
+import log from "../../../utils/log"
 
 
 export default function SidePanelOption({ico,text,href,expanded,onClick, options}){
@@ -6,7 +7,7 @@ export default function SidePanelOption({ico,text,href,expanded,onClick, options
   // const match = href && useMatch(href || "")
   const navigate = useNavigate()
   const {pathname} = useLocation()
-  // console.log(location)
+  // log("LOCATION",location)
 
   function handleClick(){
     if(href){

@@ -1,3 +1,4 @@
+import log from "../../../utils/log"
 import { validatePassword, validatePasswordPair } from "./comparePasswords"
 import { isDniNieValid } from "./isDniValid"
 // import { normalizePhoneNumber } from "./normalizePhone"
@@ -30,7 +31,7 @@ export function handleChangeValueWithErr(value,setter,errSetter,validateAs=""){
   if(validateAs === ""){
     errSetter("")
   }else{
-    // console.log("VALIDATE AS ",validateAs)
+    log("VALIDATE AS ",validateAs)
     const validator = DEFAULT_VALIDATORS[validateAs] || validateAs
     checkField(value,errSetter,validator)
   }
@@ -92,7 +93,7 @@ export function validateFoValidFields(fields){
     //VALIDATIONS
     const currentValid = checkField(value,setErr,fieldValidator) 
     valid = currentValid&& valid
-    // console.log(currentValid,value,fieldValidator)
+    log(currentValid,value,fieldValidator)
   }
 
   return valid

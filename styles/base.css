@@ -62,6 +62,7 @@ a {
   font-weight: 500;
   color: #333;
   text-decoration: inherit;
+  cursor: pointer;
 }
 
 body {
