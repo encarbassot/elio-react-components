@@ -13,6 +13,7 @@
 .elio-react-components.Inputs.input__base__row {
   width: 100%;
   display: flex;
+  gap: 10px;
   align-items: center;
   justify-content: space-between;
 }
@@ -72,6 +73,19 @@
 .elio-react-components.Inputs input {
   outline: none;
   width: 100%;
+}
+
+
+
+.elio-react-components.Inputs input:disabled {
+  background-color: #aaa;
+  color: #ddd;
+  cursor: not-allowed
+}
+
+
+.elio-react-components.Inputs input::placeholder {
+  color: #888;
 }
 
 .elio-react-components.Inputs .input__combinedInput {

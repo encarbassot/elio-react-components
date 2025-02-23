@@ -5,6 +5,12 @@
   gap: 3px;
 }
 
+.elio-react-components.InputSelect.row {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px
+}
+
 
 .elio-react-components.InputSelect .InputSelect__title {
   font-weight: 400;

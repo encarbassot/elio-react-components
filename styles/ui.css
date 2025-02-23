@@ -15,3 +15,14 @@
 .error {
   color: #cc0000;
 }
+
+
+.img-filter-white {
+  filter: invert(100%) sepia(0%) saturate(0%) brightness(200%) contrast(200%);
+  /* #fff using https://codepen.io/sosuke/pen/Pjoqqp */
+}
+
+.img-filter-black {
+  filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(308deg) brightness(98%) contrast(101%);
+  /* #000 using https://codepen.io/sosuke/pen/Pjoqqp */
+}

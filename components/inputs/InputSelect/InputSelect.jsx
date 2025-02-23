@@ -2,7 +2,7 @@ import "./InputSelect.css"
 import { useEffect, useRef, useState } from "react"
 import dropdownIco from "../../../assets/icons/triangleDown.svg"
 
-export function InputSelect({options,onChange,value,wide=false,title,...props}){
+export function InputSelect({options,onChange,value,wide=false,title,inline=false,allowUnselect=false,...props}){
 
   const [isOpen,setIsOpen] = useState(false)
   const [selected,setSelected] = useState(value || options[0])
@@ -36,7 +36,7 @@ export function InputSelect({options,onChange,value,wide=false,title,...props}){
 
 
   return (<>
-    <div className="elio-react-components InputSelect" ref={dropdownRef} {...props}>
+    <div className={"elio-react-components InputSelect" + (inline? " row":"")} ref={dropdownRef} {...props}>
       {
         title &&
         <p className='InputSelect__title'>{title}</p>
@@ -53,6 +53,13 @@ export function InputSelect({options,onChange,value,wide=false,title,...props}){
           <div className="InputSelect__wrapper">
             
               <div className="InputSelect__items">
+                {
+                  allowUnselect &&
+                  <p
+                    className={"InputSelect__items__item" + (!selected?" active":"")}
+                    onClick={()=>handleSelect(null)}
+                  ></p>
+                }
                 {options.map((op,i)=>
                   <p
                     key={i}

@@ -4,7 +4,7 @@ import React, {  forwardRef, useRef, useImperativeHandle } from 'react'
 
 
 
-export const InputText = forwardRef(({icon,alt,error,value,onChange,placeholder,title,typeNumber=false,onEnter, onKeyDown,...props},ref) => {
+export const InputText = forwardRef(({icon,alt,error,value,onChange,placeholder,title,typeNumber=false,inline=false,onEnter, onKeyDown,...props},ref) => {
   const inpRef = useRef(null);
   
   //seleccionar el campo, con el cursor al final
@@ -32,7 +32,7 @@ export const InputText = forwardRef(({icon,alt,error,value,onChange,placeholder,
   }
 
   return (
-    <div className='elio-react-components Inputs input__base'>
+    <div className={'elio-react-components Inputs input__base'+ (inline?"__row":"")}>
       {
         title &&
         <p className='input__title'>{title}</p>
