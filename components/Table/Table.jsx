@@ -4,6 +4,7 @@ import "./Table.css"
 
 import icoEdit from "../../assets/icons/edit.svg"
 import icoTrash from "../../assets/icons/trash.svg"
+import icoConfig from "../../assets/icons/config.svg"
 import icoCancel from "../../assets/icons/cancel.svg"
 import icoConfirm from "../../assets/icons/confirm.svg"
 import icoUp from "../../assets/icons/triangleUp.svg"
@@ -19,6 +20,7 @@ export function Table({
   onUpdate,
   onAccept,
   onCancel,
+  onConfig,
 
   sortingColumn : _sortingColumn = undefined,
   sortingDirection : _sortingDirection = "ASC", // or "DESC"
@@ -32,7 +34,7 @@ export function Table({
   const [sortingColumn, setSortingColumn] = useState(_sortingColumn)
   const [sortingDirection, setSortingDirection] = useState(_sortingDirection === "ASC")
 
-  const hasActions = Boolean(onDelete) || Boolean(onUpdate) || Boolean(onAccept) || Boolean(onCancel)
+  const hasActions = Boolean(onDelete) || Boolean(onUpdate) || Boolean(onAccept) || Boolean(onCancel) || Boolean(onConfig)
 
   if(headers.length!==columnWidths.length){
     console.warn("TABLE: columns and headers must be same length")
@@ -178,6 +180,10 @@ export function Table({
     onDelete && onDelete(elem,i)
   }
 
+  function handleConfig(elem,i){
+    onConfig && onConfig(elem,i)
+  }
+
 
   function handleChangeSortingColumn(n){
     if(sortingColumn === n){
@@ -271,6 +277,7 @@ export function Table({
                           {onCancel && <button onClick={()=>handleCancel(element,i)}><img src={icoCancel} /></button>}
                           {onUpdate && <button onClick={()=>handleUpdate(element,i)}><img src={icoEdit} /></button>}
                           {onDelete && <button onClick={()=>handleDelete(element,i)}><img src={icoTrash} /></button>}
+                          {onConfig && <button onClick={()=>handleConfig(element,i)}><img src={icoConfig} /></button>}
                         </td>
                       }
                   </tr>

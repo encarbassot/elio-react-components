@@ -31,11 +31,16 @@
   height: 100dvh;
   z-index: 15;
   border-right: 1px solid rgba(51, 51, 51, 0.2);
+
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 2rem;
+  align-items: center;
+
   transition: width 0.5s ease;
+
   overflow-x: hidden;
+  overflow-y: hidden;
   flex-shrink: 0;
 
   background-color: white;
@@ -43,58 +48,39 @@
 
   padding-bottom: 2rem;
   padding-top: 2rem;
-
-
 }
 
 .elio-react-components.Template__SidePanel .Sidepanel.extended {
   width: 210px;
 }
 
-
-
-
-
-.elio-react-components.Template__SidePanel .Sidepanel__logo {
-  cursor: pointer;
-  width: 240px;
-  height: 100px;
-  object-fit: contain;
-  opacity: 0.75;
-  margin: 1rem auto 1rem auto;
-  transition: 0.3s ease-in-out;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__logo:hover {
-  opacity: 0.9;
+.elio-react-components.Template__SidePanel .Sidepanel__scrollableColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  flex: 1;
+  padding: 0;
 }
 
 
 
 
-
-
+/* NAV */
+.elio-react-components.Template__SidePanel .Sidepanel__footer,
 .elio-react-components.Template__SidePanel .Sidepanel__list {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  /* height: 80vh;
-  min-height: 660px; */
+  justify-content: center;
 }
 
-
-
-
-
-
+/* FOOTER */
 .elio-react-components.Template__SidePanel .Sidepanel__footer {
   margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
 }
 
 @media (max-height: 800px) {
@@ -106,6 +92,7 @@
 
 }
 
+
 .elio-react-components.Template__SidePanel .Sidepanel__version {
   font-size: 10px
 }
@@ -113,114 +100,13 @@
 
 
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__options p,
-.elio-react-components.Template__SidePanel .Sidepanel__option p {
-  margin: 0;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__option {
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 31px;
-  width: 100%;
-  position: relative;
-  opacity: 0.6;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  box-sizing: border-box;
-}
-
-
-.elio-react-components.Template__SidePanel .Sidepanel__option:hover {
-  opacity: 1;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__option__options {
-  display: flex;
-  flex-direction: column;
-  margin-top: -15px;
-  margin-bottom: 0px;
-  gap: 15px;
-  padding-left: 30px;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__option__options--hide {
-  display: none;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__option p {
-  position: absolute;
-  left: 70px;
-  width: 500px;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__hide__text {
-  color: transparent;
-  transition: all 0.4s ease-in;
-  -webkit-transition: all 0.4s ease-in;
-  -moz-transition: all 0.4s ease-in;
-  -ms-transition: all 0.4s ease-in;
-  -o-transition: all 0.4s ease-in;
-}
 
 
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__icon {
-  width: 20px;
-  height: 20px;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  fill: none !important;
-}
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__icon:hover {
-  opacity: 1;
-}
 
-.elio-react-components.Template__SidePanel .Sidepanel__option--selected {
-  opacity: 1;
-  background-color: #3331;
-}
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__border--selected,
-.elio-react-components.Template__SidePanel .Sidepanel__option--selected .Sidepanel__option__border {
-  min-width: 4px;
-  height: 100%;
-  background-color: #333333d5;
-  position: absolute;
-  border-radius: 5px 0 0 5px;
-  right: 0;
-}
 
-.elio-react-components.Template__SidePanel .Sidepanel__subOption {
-  opacity: 0.6;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__subOption:hover {
-  opacity: 1;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__subOption.selected {
-  opacity: 1;
-}
 
 
 
@@ -243,20 +129,16 @@
 
 /* ------------------------------ SIDEPANEL OPTION ------------------------------ */
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__options p,
-.elio-react-components.Template__SidePanel .Sidepanel__option p {
-  margin: 0;
-}
 
 .elio-react-components.Template__SidePanel .Sidepanel__option {
   cursor: pointer;
+
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 31px;
+  flex-direction: column;
+  /* gap between Parent option and suboptions */
+  gap: 1rem;
   width: 100%;
-  position: relative;
-  opacity: 0.6;
+
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -265,36 +147,52 @@
   box-sizing: border-box;
 }
 
-
-.elio-react-components.Template__SidePanel .Sidepanel__option:hover {
-  opacity: 1;
+.elio-react-components.Template__SidePanel .Sidepanel__option:has(>.Sidepanel__option__options.hide) {
+  gap: 0;
+  /* when closend hide gap */
 }
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__options {
+.elio-react-components.Template__SidePanel .Sidepanel__option__icon {
+  width: 20px;
+  height: 20px;
+
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+
+  fill: none !important;
+}
+
+.elio-react-components.Template__SidePanel .Sidepanel__subOption .content,
+.elio-react-components.Template__SidePanel .Sidepanel__option .content {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin-top: -15px;
-  margin-bottom: 0px;
-  gap: 15px;
-  padding-left: 30px;
-  font-size: 15px;
-  font-weight: 500;
+  align-items: center;
+  gap: 10px;
 }
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__options--hide {
-  display: none;
+.elio-react-components.Template__SidePanel .Sidepanel__subOption.selected .Sidepanel__option__border,
+.elio-react-components.Template__SidePanel .Sidepanel__option.selected .row .Sidepanel__option__border {
+  min-width: 8px;
+  height: 23px;
+  background-color: black;
+  border-radius: 5px 0 0 5px;
+  right: 0;
 }
 
-.elio-react-components.Template__SidePanel .Sidepanel__option p {
-  position: absolute;
+
+.elio-react-components.Template__SidePanel .Sidepanel__subOption .Sidepanel__text,
+.elio-react-components.Template__SidePanel .Sidepanel__option .Sidepanel__text {
+  /* position: absolute; */
   left: 70px;
-  width: 500px;
   font-size: 15px;
   font-weight: 500;
-}
 
-.elio-react-components.Template__SidePanel .Sidepanel__hide__text {
-  color: transparent;
+  /* no wrap */
+  white-space: nowrap;
+
   transition: all 0.4s ease-in;
   -webkit-transition: all 0.4s ease-in;
   -moz-transition: all 0.4s ease-in;
@@ -302,53 +200,75 @@
   -o-transition: all 0.4s ease-in;
 }
 
+.elio-react-components.Template__SidePanel .Sidepanel__text.hide {
+  /* hide text with transition*/
+  color: transparent;
+}
 
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__icon {
-  width: 20px;
-  height: 20px;
+
+.elio-react-components.Template__SidePanel .Sidepanel__subOption,
+.elio-react-components.Template__SidePanel .Sidepanel__option .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 31px;
+  width: 100%;
+  opacity: 0.6;
+
+
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
-  fill: none !important;
 }
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__icon:hover {
+.elio-react-components.Template__SidePanel .Sidepanel__subOption:hover,
+.elio-react-components.Template__SidePanel .Sidepanel__subOption.selected,
+.elio-react-components.Template__SidePanel .Sidepanel__option.selected .row,
+.elio-react-components.Template__SidePanel .Sidepanel__option .row:hover {
   opacity: 1;
 }
 
-.elio-react-components.Template__SidePanel .Sidepanel__option--selected {
-  opacity: 1;
+
+
+
+
+
+
+/* ----------------------------- SIDE PANEL SUBOPTIONS --------------------------------- */
+
+.elio-react-components.Template__SidePanel .Sidepanel__option__options {
+  width: 100%;
+  max-height: 1000px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  margin-bottom: 0px;
+
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+
+  overflow: hidden;
+
+  font-size: 15px;
+  font-weight: 500;
+
 }
 
-.elio-react-components.Template__SidePanel .Sidepanel__option__border--selected,
-.elio-react-components.Template__SidePanel .Sidepanel__option--selected .Sidepanel__option__border {
-  min-width: 4px;
-  height: 100%;
-  background-color: #333333d5;
-  position: absolute;
-  border-radius: 5px 0 0 5px;
-  right: 0;
+.elio-react-components.Template__SidePanel .Sidepanel__option__options.hide {
+  max-height: 0;
+  /* TODO animate */
 }
 
 .elio-react-components.Template__SidePanel .Sidepanel__subOption {
-  opacity: 0.6;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__subOption:hover {
-  opacity: 1;
-}
-
-.elio-react-components.Template__SidePanel .Sidepanel__subOption.selected {
-  opacity: 1;
+  padding-left: 50px;
 }
 
 
