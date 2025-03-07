@@ -111,35 +111,6 @@ button {
 
 }
 
-/* .button--red,
-.button {
-  background-color: #fafafa;
-  color: #333;
-  border: 1px solid rgba(0, 0, 0, 0.209);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-  border-radius: 5px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  transition: background-color .2s ease, color .2s ease;
-}
-
-.button:hover {
-  background-color: #aaa;
-  color: white;
-}
-
-.button--red {
-  color: #a00;
-  ;
-}
-
-.button--red:hover {
-  background-color: #E77;
-  color: #fff;
-} */
 
 .button--red,
 .button {
@@ -164,8 +135,8 @@ button {
 }
 
 .button--red {
-  color: #a00;
-  ;
+  background: #a00;
+  color: white
 }
 
 .button--red:hover {
@@ -173,6 +144,16 @@ button {
   color: #fff;
 }
 
+.button>img {
+  filter: invert(100%);
+  transition: all .2s ease;
+  width: 25px;
+  height: 25px;
+}
+
+.button:hover>img {
+  filter: invert(0%);
+}
 
 ul {
   list-style: none;

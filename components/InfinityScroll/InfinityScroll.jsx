@@ -91,6 +91,16 @@ export default function InfinityScroll({
     }
   },[data,onDataUpdate])
 
+
+  // const debouncedFilterFetch = useDebounce(()=>{
+
+  // })
+
+  useEffect(()=>{
+    // console.log("FETCH PARAMS",fetchParams)
+    fetchData(1,true)
+  },[fetchParams])
+
   /**
    * Internal fetch data for infinite scrolling
    */

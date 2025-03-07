@@ -66,7 +66,10 @@
   left: 0;
   right: 0;
 
+}
 
+.elio-react-components.InputSelect .InputSelect__wrapper.wide {
+  width: 300px;
 }
 
 .elio-react-components.InputSelect .InputSelect__items {
@@ -74,7 +77,10 @@
   max-height: 130px;
   padding: 5px;
   background-color: #f1f1f1;
+}
 
+.elio-react-components.InputSelect .InputSelect__items.wide {
+  /* max-height: 200px; */
 }
 
 .elio-react-components.InputSelect .InputSelect__items::-webkit-scrollbar {

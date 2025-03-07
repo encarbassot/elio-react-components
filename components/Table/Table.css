@@ -1,3 +1,27 @@
+.elio-react-components.Table {
+  overflow-x: auto;
+}
+
+.elio-react-components.Table::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+/* Track */
+.elio-react-components.Table::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.elio-react-components.Table::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.elio-react-components.Table::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .elio-react-components.Table table {
   border-collapse: collapse;
   width: 100%;
@@ -15,7 +39,9 @@
   /* border: 1px solid #ddd; */
   padding: 8px;
   text-align: left;
-
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* .elio-react-components.Table th span {

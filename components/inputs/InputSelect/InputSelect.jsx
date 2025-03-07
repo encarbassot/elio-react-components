@@ -2,7 +2,18 @@ import "./InputSelect.css"
 import { useEffect, useRef, useState } from "react"
 import dropdownIco from "../../../assets/icons/triangleDown.svg"
 
-export function InputSelect({options,onChange,value,wide=false,title,inline=false,allowUnselect=false,...props}){
+export function InputSelect({
+  options=[],
+  onChange,
+  value,
+  wide=false,
+  title,
+  inline=false,
+  allowUnselect=false,
+  formatViewOption=x=>x,
+  optional=false,
+  ...props
+}){
 
   const [isOpen,setIsOpen] = useState(false)
   const [selected,setSelected] = useState(value || options[0])
@@ -46,11 +57,11 @@ export function InputSelect({options,onChange,value,wide=false,title,inline=fals
         <div className="InputSelect__selected"
           onClick={()=>setIsOpen(!isOpen)}
         >
-          <span>{selected}</span>
+          <span>{formatViewOption(selected)}</span>
           <img className={"InputSelect__dropdown" + (isOpen?" open":"")} src={dropdownIco} alt="" />
         </div>
         {isOpen &&
-          <div className="InputSelect__wrapper">
+          <div className={"InputSelect__wrapper"+(wide?" wide":"")}>
             
               <div className="InputSelect__items">
                 {
@@ -65,7 +76,7 @@ export function InputSelect({options,onChange,value,wide=false,title,inline=fals
                     key={i}
                     className={"InputSelect__items__item" + (op===selected?" active":"")}
                     onClick={()=>handleSelect(op)}
-                  >{op}</p>
+                  >{formatViewOption(op)}</p>
                 )}
               </div>
           

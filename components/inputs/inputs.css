@@ -26,6 +26,10 @@
   margin: 0;
 }
 
+.elio-react-components.Inputs .input__title .input__title__hint {
+  float: right;
+}
+
 /* ------------------ INPUT CONTAINER ------------------ */
 /* wraps the  ( "icon" / (input,error) ) */
 .elio-react-components.Inputs .input__container {
@@ -68,6 +72,23 @@
   font-weight: 300;
   outline: none;
 
+}
+
+/* Chrome, Safari, Edge, Opera */
+.elio-react-components .input__element:not(.showArrows)::-webkit-outer-spin-button,
+.elio-react-components .input__element:not(.showArrows)::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.elio-react-components .input__element:not(.showArrows)[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.elio-react-components .input__element.alignRight {
+  text-align: right;
 }
 
 .elio-react-components.Inputs input {
