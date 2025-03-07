@@ -1,0 +1,12 @@
+.elio-react-components.EditorOutput ul {
+
+  list-style-type: disc;
+  padding-left: 40px;
+  margin: 1rem 0;
+}
+
+.elio-react-components.EditorOutput ul li {
+
+  list-style: disc;
+
+}

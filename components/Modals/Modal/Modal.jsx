@@ -6,9 +6,12 @@ import { createPortal } from 'react-dom';
 
 export function Modal({ closeModal,children,zIndex = 19,dimmer=true}) {
 
-  const {pushModal,removeModal} = useModalsContext()
+  const modalContext = useModalsContext()
 
   useEffect(() => {
+    if(!modalContext) return
+    const  {pushModal,removeModal} = modalContext
+    
     const handleEscapeKey = (event) => {
       if (event.key === 'Escape' && closeModal) {
         event.stopPropagation()
