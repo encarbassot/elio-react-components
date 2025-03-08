@@ -28,3 +28,16 @@ export function groupBySingle(array, key) {
     return acc;
   }, {});
 }
+
+
+
+
+
+
+export function toTitleCase(str) {
+  return str
+    .toLowerCase() // Convert everything to lowercase first
+    .split(" ") // Split the string into words
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter
+    .join(" "); // Join words back into a single string
+}

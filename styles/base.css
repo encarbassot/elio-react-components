@@ -134,14 +134,28 @@ button {
   color: black;
 }
 
+.button.red,
 .button--red {
   background: #a00;
+  border-color: #a00;
   color: white
 }
 
+.button.green {
+  background-color: #0a0;
+  color: white;
+  border-color: #0a0;
+}
+
+.button.red:hover,
 .button--red:hover {
   background-color: #E77;
   color: #fff;
+}
+
+.button.muted {
+  background-color: white;
+  color: black;
 }
 
 .button>img {
