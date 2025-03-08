@@ -9,7 +9,7 @@ import Paragraph from "@editorjs/paragraph";
 import Marker from "@editorjs/marker";
 import InlineCode from "@editorjs/inline-code";
 
-const EditorComponent = ({ data, onChange }) => {
+const EditorComponent = ({ data, onChange , style, ...props}) => {
   const editorRef = useRef(null);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const EditorComponent = ({ data, onChange }) => {
     };
   }, []);
 
-  return <div id="editorjs" style={{ minHeight: "300px", border: "1px solid #ddd", padding: "10px" }}></div>;
+  return <div id="editorjs" style={{ minHeight: "300px", border: "1px solid #ddd", padding: "10px", ...style}} {...props}></div>;
 };
 
 export default EditorComponent;

@@ -3,6 +3,18 @@
   flex-direction: column;
   width: 100%;
   gap: 3px;
+  position: relative;
+}
+
+.InputSelect__error {
+  position: absolute;
+  top: 100%;
+  color: var(--red);
+  font-size: 14px;
+  font-family: var(--text-font), sans-serif;
+  font-weight: 600;
+  opacity: 0.75;
+  padding-left: 0.5rem;
 }
 
 .elio-react-components.InputSelect.row {

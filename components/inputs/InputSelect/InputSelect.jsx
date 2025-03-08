@@ -12,6 +12,7 @@ export function InputSelect({
   allowUnselect=false,
   formatViewOption=x=>x,
   optional=false,
+  error="",
   ...props
 }){
 
@@ -83,6 +84,9 @@ export function InputSelect({
           </div>
         }
       </div>
+      {
+        error && <p className="InputSelect__error">{error}</p>
+      }
     </div>
   </>)
 }

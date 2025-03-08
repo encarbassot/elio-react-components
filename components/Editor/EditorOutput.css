@@ -1,3 +1,8 @@
+.elio-react-components.EditorOutput *,
+.elio-react-components.EditorOutput {
+  text-align: left;
+}
+
 .elio-react-components.EditorOutput ul {
 
   list-style-type: disc;
