@@ -1,7 +1,7 @@
 import "./TextModal.css";
 import { Modal } from "../Modal/Modal";
 import ico_close from "../../../assets/icons/cancel.svg"
-import { useEffect } from "react";
+
 export function TextModal({
   title,
   contentClassName,
@@ -19,10 +19,6 @@ export function TextModal({
 }) {
 
   const isLoading = aceptarLoading || cancelarLoading || buttons.some(x=>x.loading)
-
-
-
-
 
   function handleClickOutside(e){
     e.stopPropagation()
