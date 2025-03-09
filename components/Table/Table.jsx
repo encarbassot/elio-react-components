@@ -26,6 +26,11 @@ export function Table({
   sortingDirection : _sortingDirection = "ASC", // or "DESC"
 }) {
 
+  if(!elements || !headers){
+    console.warn("TABLE: elements and headers are mandatory")
+    return <div className="Table">No elements or headers</div>
+  }
+
   const tableRef = useRef(null)
 
   const [vcolumnWidths, setColumnWidths] = useState(columnWidths ? columnWidths : Array.from({length:headers.length}).fill(1));

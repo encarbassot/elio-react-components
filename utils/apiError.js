@@ -1,11 +1,21 @@
+// DEPRECATED
 export function getErrMsgFromResp(resp, defaultMsg = "Ha ocurrido un error inesperado.") {
+
+  if(resp?.success){
+    return {}
+  }
   let errors = {
     fields: {}, // Field-specific validation errors (for form inputs)
-    global: []  // General validation issues (e.g., entire form invalid)
+    global: [],  // General validation issues (e.g., entire form invalid)
+    code:"GENERAL"
   };
 
   if (!resp || typeof resp !== "object" || !resp.err || !resp.err.more) {
-    return { fields: {}, global: [defaultMsg] };
+    return { fields: {}, global: [defaultMsg], code:"GENERAL" };
+  }
+
+  if(resp.err.error && typeof resp.err.error === "string"){
+    errors.code = resp.err.error
   }
 
   // Extract field-specific errors (only if it's an object with string values)

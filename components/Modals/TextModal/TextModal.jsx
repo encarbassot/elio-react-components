@@ -66,7 +66,7 @@ export function TextModal({
                 aceptar && (
                   <button onClick={aceptar} className={"textModal__button"+(aceptarRed?" red":"") + (aceptarLoading? " loading":"")} disabled={isLoading}>
                     {aceptarLoading ?
-                    <span className="spinner--small"/>
+                    <span className="spinner small"/>
                     :
                     aceptarText
                     }
@@ -77,7 +77,7 @@ export function TextModal({
                 cancelar &&(
                   <button onClick={cancelar} className={"textModal__button"+(cancelarRed?" red":"") + (cancelarLoading?" loading":"")} disabled={isLoading}>
                   {cancelarLoading ?
-                  <span className="spinner--small"/>
+                  <span className="spinner small"/>
                   :
                   cancelarText
                   }
@@ -89,7 +89,7 @@ export function TextModal({
                 buttons.map(({onClick,red,text,loading},i)=>
                 <button key={i} onClick={onClick} className={"textModal__button"+(red?" red":"")+(loading?" loading":"")} disabled={isLoading}>{
                   loading?
-                  <span className="spinner--small"/>
+                  <span className="spinner small"/>
                   :
                   text
                   }</button>

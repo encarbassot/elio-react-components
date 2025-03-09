@@ -99,9 +99,11 @@
 
 
 .elio-react-components.Inputs input:disabled {
-  background-color: #aaa;
-  color: #ddd;
-  cursor: not-allowed
+  background-color: #f0f0f0;
+  /* Light gray for a soft, disabled look */
+  color: #888;
+  /* Slightly dimmed text color */
+  cursor: not-allowed;
 }
 
 

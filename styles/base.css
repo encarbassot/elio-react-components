@@ -153,9 +153,17 @@ button {
   color: #fff;
 }
 
+.button.disabled .button:disabled,
+.button[disabled],
 .button.muted {
   background-color: white;
   color: black;
+}
+
+.button.disabled .button:disabled,
+.button[disabled] {
+  cursor: not-allowed;
+  color: #999;
 }
 
 .button>img {
@@ -201,7 +209,7 @@ ul {
 
 }
 
-.spinner--small {
+.spinner.small {
   display: block;
   width: 20px;
   height: 20px;
@@ -224,6 +232,11 @@ ul {
   animation: spin 2s linear infinite;
 }
 
+.button:hover .spinner,
+.button.disabled .spinner,
+.button[disabled] .spinner,
+.button.muted .spinner,
+.spinner.black,
 .spinner--small.black,
 .spinner.black {
   border-color: black;

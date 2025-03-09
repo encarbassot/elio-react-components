@@ -36,13 +36,22 @@
   bottom: 10px;
   left: 0%;
 
-  min-width: 300px;
+  min-width: max-content;
+  /* Automatically adjust width based on content */
+  max-width: 400px;
+  /* Prevent it from being too wide */
 
   border-radius: 10px;
+  white-space: pre-line;
+  /* Ensures line breaks are respected */
 }
 
 .elio-react-components .HintIco:hover .HintIco__hint {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: auto;
+  white-space: pre-line;
 }
 
 .elio-react-components .HintIco__hint p:not(:last-child) {

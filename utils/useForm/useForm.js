@@ -50,7 +50,7 @@ const DEFAULT_VALIDATORS = {
  */
 
 
-export function useForm(fields,customValidators){
+export function useForm(fields,{customValidators,onFieldUpdate}={}){
 
   //list of validators to use in this form
   const defaultValidators ={
@@ -81,7 +81,12 @@ export function useForm(fields,customValidators){
   const initialState = {};
   formFields.forEach((field) => {
     // console.log(field)
-    initialState[field.fieldName] = {value:field?.value || '',err:'',edited:false, ignore:field.ignore || false};
+    initialState[field.fieldName] = {
+      value:field?.value || '',
+      err:'',
+      edited:false,
+      ignore:field.ignore || false
+    };
   });
 
   const [isValidating,setIsValidating] = useState(false);
@@ -94,10 +99,16 @@ export function useForm(fields,customValidators){
       const updated = {...prev}
       if(typeof value === "function"){
         updated[fieldName].value=value(updated[fieldName].value)
+      }else{
+        updated[fieldName].value=value;
       }
-      updated[fieldName].value=value;
       updated[fieldName].err=""
       updated[fieldName].edited=true
+
+      if(typeof onFieldUpdate === "function"){
+        onFieldUpdate({[fieldName]:updated[fieldName]})
+      }
+
       return updated
     });
   };
