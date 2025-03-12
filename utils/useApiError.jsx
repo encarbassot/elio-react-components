@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextModal } from "../components/Modals/TextModal/TextModal";
 
+// const {errModal,errFields,validateResponse,errCode, clearErrors} = useApiError()
 export default function useApiError() {
     const [errModal, setErrModal] = useState(null);   // General error messages
     const [errFields, setErrFields] = useState({});   // Field-specific errors
@@ -65,6 +66,10 @@ export function getErrMsgFromResp(resp, defaultMsg = "Ha ocurrido un error inesp
 
   if (!resp || typeof resp !== "object" || !resp.err || !resp.err.more) {
     return { fields: {}, global: [defaultMsg], code:"GENERAL" };
+  }
+
+  if (resp.err.emailSent === false) {
+    errors.global.push("No se ha podido enviar el mensaje, inténtelo más tarde.");
   }
 
   if(resp.err.error && typeof resp.err.error === "string"){
