@@ -210,6 +210,14 @@ export function Table({
     const elementA = elementToArray(a)[sortingColumn]
     const elementB = elementToArray(b)[sortingColumn]
 
+    // Check if both values are numbers, if so, compare them numerically
+    const isNumberA = !isNaN(elementA);
+    const isNumberB = !isNaN(elementB);
+
+    if (isNumberA && isNumberB) {
+      // If both are numbers, compare them numerically
+      return sortingDirection ? elementA - elementB : elementB - elementA;
+    }
 
     // Convert to strings and compare both elements
     const valueA = elementA ? elementA.toString() : ''; // to avoid null/undefined errors
