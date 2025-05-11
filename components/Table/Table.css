@@ -2,9 +2,25 @@
   overflow-x: auto;
 }
 
+.elio-react-components.Table.autoY {
+  height: 100%;
+  max-height: 100%;
+  max-height: 100dvh;
+  overflow-y: auto;
+}
+
+.elio-react-components.Table.autoY thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  /* Make sure it's above tbody */
+  background-color: #f2f2f2;
+  /* Must define a background */
+}
+
 .elio-react-components.Table::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
+  width: 8px;
+  height: 8px;
 }
 
 /* Track */
@@ -30,9 +46,19 @@
 
 .elio-react-components.Table tr {}
 
+.elio-react-components.Table.striped tr:nth-child(even) {
+  background-color: #D9D9D9;
+}
+
+.elio-react-components.Table.striped td:not(:first-child) {
+  border-left: 1px solid #d9d9d988;
+}
+
 .elio-react-components.Table tr:hover {
   background-color: #ddd;
 }
+
+
 
 .elio-react-components.Table th,
 .elio-react-components.Table td {
@@ -42,6 +68,18 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.elio-react-components.Table.compact th,
+.elio-react-components.Table.compact td {
+  /* border: 1px solid #ddd; */
+  padding: 2px;
+  font-size: small;
+}
+
+.elio-react-components.Table.compact th:first-child,
+.elio-react-components.Table.compact td:first-child {
+  padding-left: 8px;
 }
 
 /* .elio-react-components.Table th span {

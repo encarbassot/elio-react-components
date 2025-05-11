@@ -8,6 +8,7 @@ import { useLocalStorage } from '../../hooks';
 import SidePanelOption from './TemplateSidePanelOption';
 
 export default function SidePanel({
+  compact=false,
   children,
   options = [],
   version,
@@ -38,9 +39,9 @@ export default function SidePanel({
 
 
   return (
-    <div className="elio-react-components Template__SidePanel">
+    <div className={`elio-react-components Template__SidePanel ${compact?"compact":""}`}>
 
-      <div className={"Sidepanel "+(expanded ? "extended" : "")} >
+      <aside className={"Sidepanel "+(expanded ? "extended" : "")} >
 
         {logo && <SidePanelOption {...logo}/>}
 
@@ -63,7 +64,7 @@ export default function SidePanel({
             {bottom}
           </footer>
         </div>
-      </div>
+      </aside>
 
       <main>
 

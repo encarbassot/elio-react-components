@@ -16,11 +16,18 @@ export function Table({
   elementToArray,
   columnWidths, // always integers, that means 1 => 1fr
 
+  //styles
+  compact:isCompact = false,
+  striped:isStriped = false,
+  autoY = false,
+
+  ///actions
   onDelete,
   onUpdate,
   onAccept,
   onCancel,
   onConfig,
+  onClickRow,
 
   sortingColumn : _sortingColumn = undefined,
   sortingDirection : _sortingDirection = "ASC", // or "DESC"
@@ -59,7 +66,11 @@ export function Table({
 
 
 
-
+  function handleOnClickRow(event,i,element){
+    if(onClickRow){
+      onClickRow(event,i,element)
+    }
+  }
 
 
   function handleMouseOver(event,i){
@@ -234,7 +245,7 @@ export function Table({
 
   return (
     <>
-      <div className="elio-react-components Table" ref={tableRef}>
+      <div className={"elio-react-components Table"+(isCompact?" compact":"")+(isStriped?" striped":"")+(autoY?" autoY":"")} ref={tableRef}>
         <table>
           <thead>
             <tr>
@@ -272,6 +283,7 @@ export function Table({
                 return (
                   <tr
                     key={i}
+                    onClick={e=>handleOnClickRow(e,i,element)}
                   >
                       {
                         headers.map((_,j)=>{
