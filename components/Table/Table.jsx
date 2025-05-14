@@ -9,16 +9,44 @@ import icoCancel from "../../assets/icons/cancel.svg"
 import icoConfirm from "../../assets/icons/confirm.svg"
 import icoUp from "../../assets/icons/triangleUp.svg"
 import icoDown from "../../assets/icons/triangleDown.svg"
+import { InputText } from "../inputs/InputText/InputText";
+
+/*
+TODO - columnBehaviors
+Simplificar la logica de headers, elementsToArray, columnWidths y columnCallbacks a un solo array
+
+[
+  {
+    mode: "editable", // or "static" or "interactive"
+    render: (element, rowIndex) => <span>{element.name}</span>,
+    editor: {
+      type: "InputText", // could be dropdown, datepicker, etc.
+      onCommit: (row, key, newValue) => {}
+    }
+  },
+  {
+    mode: "interactive",
+    render: (element, rowIndex) => (
+      <StatusIcon isActive={element.enabled} />
+    ),
+    onClick: (row, key) => toggleStatus(row)
+  }
+]
+
+*/
 
 export function Table({
   elements, //mandatory
   headers,  //mandatory
   elementToArray,
   columnWidths, // always integers, that means 1 => 1fr
+  // columnBehaviors,//TODO
+  columnCallbacks,
 
   //styles
   compact:isCompact = false,
   striped:isStriped = false,
+  borders = false,
   autoY = false,
 
   ///actions
@@ -42,6 +70,8 @@ export function Table({
 
   const [vcolumnWidths, setColumnWidths] = useState(columnWidths ? columnWidths : Array.from({length:headers.length}).fill(1));
   const [isOnMargin,setIsOnMargin] = useState(false)
+
+  const [editingCell, setEditingCell] = useState(null)
 
   const [sortingColumn, setSortingColumn] = useState(_sortingColumn)
   const [sortingDirection, setSortingDirection] = useState(_sortingDirection === "ASC")
@@ -245,7 +275,7 @@ export function Table({
 
   return (
     <>
-      <div className={"elio-react-components Table"+(isCompact?" compact":"")+(isStriped?" striped":"")+(autoY?" autoY":"")} ref={tableRef}>
+      <div className={"elio-react-components Table"+(isCompact?" compact":"")+(isStriped?" striped":"")+(autoY?" autoY":"")+(borders?" borders":"")} ref={tableRef}>
         <table>
           <thead>
             <tr>
@@ -288,10 +318,60 @@ export function Table({
                       {
                         headers.map((_,j)=>{
                           const dataElement = array[j]
+
+                          const isInputNumber = columnCallbacks && columnCallbacks[j]?.type === "InputNumber"
+                          const isEditableInput = columnCallbacks && (columnCallbacks[j]?.type === "InputText" || isInputNumber)
+
+                          const handleSubmitEdit = async (value, element, j, i) => {
+                            if (!columnCallbacks?.[j]) return
+                            await columnCallbacks[j].callback( element, value, j, i)
+                            setEditingCell(null)
+                          }
+
                           return(
-                            <td
-                              key={"-"+i+"-"+j}
-                            >{dataElement?dataElement:undefined}</td>
+                            <td key={"-"+i+"-"+j} onClick={e => {
+                              if (
+                                columnCallbacks &&
+                                columnCallbacks[j]?.type === "InputText" &&
+                                editingCell === null
+                              ) {
+                                e.stopPropagation()
+                                setEditingCell({ row: i, col: j, value: dataElement })
+                              }
+                            }}>                              
+                              {
+                                // INPUT TEXT LIKE
+                                columnCallbacks && isEditableInput
+                                // EDITING CURRENT CELL
+                                ? (editingCell?.row === i && editingCell?.col === j 
+                                  ? <InputText
+                                      value={editingCell.value}
+                                      onChange={e => setEditingCell({ ...editingCell, value: e.target.value })}
+
+                                      onBlur={() => handleSubmitEdit(editingCell.value, elements[i], j, i)}
+                                      onEnter={() => handleSubmitEdit(editingCell.value, elements[i], j, i)}
+
+                                      onEsc={()=> setEditingCell(null)}
+                                      autoFocus
+                                      typeNumber = {isInputNumber}
+                                      alignRight = {isInputNumber}
+                                      // title={headers[j]?.label || ""}
+                                    />
+                                    // NOT EDITING CURRENT CELL (input is shy waiting for click)
+                                  : <span>{dataElement}</span>)
+                                :
+                                // INPUT BUTTON LIKE
+                                columnCallbacks && columnCallbacks[j]?.type === "onClick"
+                                  ? <span onClick={e => {
+                                      e.stopPropagation()
+                                      columnCallbacks[j].callback(element, j, i)
+                                    }}>
+                                      {dataElement}
+                                    </span>
+                                // NO ACTION
+                                : dataElement
+                              }
+                            </td>
                           )
                         })
                       }

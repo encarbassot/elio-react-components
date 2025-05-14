@@ -18,6 +18,11 @@
   /* Must define a background */
 }
 
+.elio-react-components.Table.borders thead th,
+.elio-react-components.Table.borders tbody td {
+  border: 1px solid black;
+}
+
 .elio-react-components.Table::-webkit-scrollbar {
   width: 8px;
   height: 8px;

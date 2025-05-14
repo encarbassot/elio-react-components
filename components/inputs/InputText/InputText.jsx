@@ -17,6 +17,7 @@ export const InputText = forwardRef(({
   showArrows=false,
   inline=false,
   onEnter,
+  onEsc,
   onKeyDown,
   alignRight=false,
   optional=false,
@@ -48,7 +49,9 @@ export const InputText = forwardRef(({
     if(onkeydown) onKeyDown(event)
 
 
-    if(onEnter && event.key === "Enter") onEnter()
+    if(onEnter && event.key === "Enter") onEnter(event)
+
+    if(onEsc && event.key === "Escape") onEsc(event)
   }
 
   return (
