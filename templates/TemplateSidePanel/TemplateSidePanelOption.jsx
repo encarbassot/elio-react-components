@@ -4,7 +4,9 @@ import React, { useEffect, useState } from "react"
 import { ROUTES } from "../../../routes/navigationConfig"
 
 
-export default function SidePanelOption({ico,text,path,expanded,onClick, options, type="option"}){
+export default function SidePanelOption({ico,text,path,expanded,onClick, options, type="option", ...more}){
+
+  const {onlyIfOpen=false} = more
 
   // const match = href && useMatch(href || "")
   const navigate = useNavigate()
@@ -75,6 +77,9 @@ export default function SidePanelOption({ico,text,path,expanded,onClick, options
   }
 
 
+  if(onlyIfOpen && !expanded){
+    return <></>
+  }
   return(<>
 
     <div 
