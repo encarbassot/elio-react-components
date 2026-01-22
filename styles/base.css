@@ -50,6 +50,9 @@
   --purple: #AE6BCC;
 
 
+  --admin-color: #0066cc;
+
+
 
 
   --max-width: 1400px;
@@ -113,7 +116,6 @@ button {
 
 }
 
-
 .button--red,
 .button {
   padding: 0.6em 1.2em;
@@ -141,6 +143,18 @@ button {
   background: #a00;
   border-color: #a00;
   color: white
+}
+.admin .button,
+.button.admin {
+  background-color: var(--admin-color) !important;
+  border-color: var(--admin-color) !important;
+  color: white !important;
+}
+
+button.red.lite{
+  background: white;
+  border-color: #a00;
+  color: #a00
 }
 
 .button.green {
@@ -178,6 +192,15 @@ button {
 .button:hover>img {
   filter: invert(0%);
 }
+
+
+@media (max-width: 768px) {
+  .button {
+    padding: .3rem .6rem;
+    font-size: 14px;
+  }
+}
+
 
 ul {
   list-style: none;
@@ -298,5 +321,81 @@ input[type=number] {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  h1{
+    font-size: 32px;
+  }
+  h2{
+    font-size: 28px; 
+  }
+  h3{
+    font-size: 24px; 
+  }
+  h4{
+    font-size: 20px; 
+  }
+  h5{
+    font-size: 18px; 
+  }
+  h6{
+    font-size: 16px; 
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.elio-react-components.InputSelect.button {
+
+  width: auto;
+
+  span{
+    font-size: 16px;
+  }
+  .InputSelect__container{
+    background: none;
+    border: none !important;
+  }
+
+  img.InputSelect__dropdown{
+    transition: filter .5s ease, transform .5s ease;
+    width: 20px;
+    height: auto;
+  }
+}
+
+.elio-react-components.InputSelect.button:not(:hover){
+  img.InputSelect__dropdown{
+    filter: invert(100%) brightness(109%) contrast(104%);  }
+}
+
+@media (max-width: 768px) {
+  .elio-react-components.InputSelect.button .InputSelect__selected{
+    padding: 0;
+  }
+  .elio-react-components.InputSelect.button {
+    span{
+      font-size: 14px;
+    }
+    img.InputSelect__dropdown{
+      width: 16px;
+    }
   }
 }

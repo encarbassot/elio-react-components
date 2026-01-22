@@ -13,6 +13,7 @@ export function InputSelect({
   formatViewOption=x=>x,
   optional=false,
   error="",
+  className="",
   ...props
 }){
 
@@ -48,7 +49,7 @@ export function InputSelect({
 
 
   return (<>
-    <div className={"elio-react-components InputSelect" + (inline? " row":"")} ref={dropdownRef} {...props}>
+    <div className={"elio-react-components InputSelect" + (inline? " row":"") + (className?" "+className:"")} ref={dropdownRef} {...props}>
       {
         title &&
         <p className='InputSelect__title'>{title}</p>
