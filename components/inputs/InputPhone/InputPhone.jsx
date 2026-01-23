@@ -105,8 +105,8 @@ export default function InputPhone({
       {
         title &&
         <p className='input__title'>{title}
-          {optional && <Hint asterisk>Opcional</Hint>}
-          {hint && <Hint className="input__title__hint">{hint}</Hint>}
+          {!optional && <Hint asterisk>Requerido</Hint>}
+          {hint && <Hint className="input__title__hint" right>{hint}</Hint>}
         </p>
       }
 

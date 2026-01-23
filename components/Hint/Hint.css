@@ -46,6 +46,11 @@
   /* Ensures line breaks are respected */
 }
 
+.elio-react-components .HintIco.right .HintIco__hint {
+  left: auto;
+  right: 0%;
+}
+
 .elio-react-components .HintIco:hover .HintIco__hint {
   display: flex;
   flex-direction: column;

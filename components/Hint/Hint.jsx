@@ -2,13 +2,13 @@ import "./Hint.css"
 
 import hintIco from "../../assets/icons/hint.svg"
 
-export function Hint({children,asterisk=false,custom, className="",...props}){
+export function Hint({children,asterisk=false,custom, right=false, className="",...props}){
 
 
   if(!children) return null
 
   return (<>
-  <span className={"elio-react-components HintIco "+ className}>
+  <span className={"elio-react-components HintIco"+(right?" right":"")+ (className?" "+className:"")}>
     {
       asterisk ? <span className="HintIco__asterisk">*</span> 
       : custom ? custom

@@ -399,3 +399,24 @@ input[type=number] {
     }
   }
 }
+
+
+
+
+.active-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgb(255, 73, 73);
+}
+
+.active-indicator[data-value="true"] {
+  background-color: #09d109;
+}
+
+.elio-react-components.Table td:has(.active-indicator) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -5,10 +5,11 @@ import lockIcon from "../../../assets/icons/candado.svg"
 import eye_hidden from '../../../assets/icons/eye-hidden.svg'
 import eye_visible from '../../../assets/icons/eye-visible.svg'
 import "../inputs.css"
+import { Hint } from '../../Hint/Hint'
 // import "./InputPassword.css" 
 
 //export default
-export const  InputPassword = forwardRef(({icon,error,value,onChange,title,onEnter, onKeyDown,...props},ref)=>{
+export const  InputPassword = forwardRef(({icon,error,value,onChange,title,onEnter, onKeyDown, opcional = false,...props},ref)=>{
     const [visible,setVisible] = useState(false)
     const [isCapsLockActive,setIsCapsLockActive] = useState(false)
   
@@ -53,14 +54,18 @@ export const  InputPassword = forwardRef(({icon,error,value,onChange,title,onEnt
 
       if(onkeydown) onKeyDown(event)
   
-      if(onEnter && event.key === "Enter") onEnter()
+      if(onEnter && event.key === "Enter") onEnter(event)
     }
   
     return(
       <div className='elio-react-components Inputs input__base'>
       {
         title &&
-        <p className='input__title'>{title}</p>
+        <p className='input__title'>
+          {title}
+          {!opcional && <Hint asterisk>Requerido</Hint>}
+        </p>
+        
       }
         <div className="input__container">
           {icon && <img className={error ? "input__icon password error" : "input__icon"}
