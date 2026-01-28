@@ -10,6 +10,7 @@ export function InputSelect({
   title,
   inline=false,
   allowUnselect=false,
+  unselectStr="Ninguno",
   formatViewOption=x=>x,
   optional=false,
   error="",
@@ -71,7 +72,7 @@ export function InputSelect({
                   <p
                     className={"InputSelect__items__item" + (!selected?" active":"")}
                     onClick={()=>handleSelect(null)}
-                  ></p>
+                  >{unselectStr}</p>
                 }
                 {options.map((op,i)=>
                   <p

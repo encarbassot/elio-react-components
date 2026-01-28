@@ -150,6 +150,10 @@ button {
   border-color: var(--admin-color) !important;
   color: white !important;
 }
+.superAdmin .button,
+.button.superAdmin {
+  background-color: #44BB55 !important;
+}
 
 button.red.lite{
   background: white;
