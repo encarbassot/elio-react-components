@@ -1,6 +1,7 @@
 import "./InputSelect.css"
 import { useEffect, useRef, useState } from "react"
 import dropdownIco from "../../../assets/icons/triangleDown.svg"
+import { Hint } from "../../Hint/Hint"
 
 export function InputSelect({
   options=[],
@@ -9,6 +10,7 @@ export function InputSelect({
   wide=false,
   title,
   inline=false,
+  opcional=true,
   allowUnselect=false,
   unselectStr="Ninguno",
   formatViewOption=x=>x,
@@ -53,7 +55,10 @@ export function InputSelect({
     <div className={"elio-react-components InputSelect" + (inline? " row":"") + (className?" "+className:"")} ref={dropdownRef} {...props}>
       {
         title &&
-        <p className='InputSelect__title'>{title}</p>
+        <p className='InputSelect__title'>
+          {title}
+          {!opcional && <Hint asterisk>Requerido</Hint>}
+        </p>
       }
 
       <div className="InputSelect__container">
