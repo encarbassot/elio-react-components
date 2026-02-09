@@ -21,7 +21,8 @@ export default function SidePanelOption({ico,text,path,expanded,onClick, options
       const sup = options.find(op=>pathname.startsWith(getSubOptionHref(op)))
       setIsSuboption(sup ? options.indexOf(sup) : -1)
     }
-    if(pathname.startsWith(path)){
+    if(pathname === path){
+    // if(pathname.startsWith(path)){
       setIsCurrent(true)
     }else{
       setIsCurrent(false)
