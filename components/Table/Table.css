@@ -1,5 +1,13 @@
 .elio-react-components.Table {
   overflow-x: auto;
+  height: 100%;
+
+  position: relative;
+}
+
+.elio-react-components.Table thead{
+  position: sticky;
+  top: 0;
 }
 
 .elio-react-components.Table.autoY {
