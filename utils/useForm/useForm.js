@@ -168,7 +168,9 @@ export function useForm(fields,{customValidators,onFieldUpdate}={}){
   function validateForEmptyFields(){
     let isValid = true
     for (const k of formFields) {
-      const value = getValue(k.fieldName)
+      const v =  getValue(k.fieldName)
+      const value = k.fieldName === "phone" && Array.isArray(v) ? v[1] : v
+
       if((value === undefined || value === "") && !getIgnore(k.fieldName) && !k.noMandatory){//vacio && !igonrar && mandatory
         isValid = false
         setError(k.fieldName,ERR_MANDATORY)
