@@ -10,11 +10,10 @@ export function InputSelect({
   wide=false,
   title,
   inline=false,
-  opcional=true,
+  optional=true,
   allowUnselect=false,
   unselectStr="Ninguno",
   formatViewOption=x=>x,
-  optional=false,
   error="",
   className="",
   ...props
@@ -57,7 +56,7 @@ export function InputSelect({
         title &&
         <p className='InputSelect__title'>
           {title}
-          {!opcional && <Hint asterisk>Requerido</Hint>}
+          {!optional && <Hint asterisk>Requerido</Hint>}
         </p>
       }
 

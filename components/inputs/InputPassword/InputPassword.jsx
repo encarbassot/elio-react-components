@@ -9,7 +9,7 @@ import { Hint } from '../../Hint/Hint'
 // import "./InputPassword.css" 
 
 //export default
-export const  InputPassword = forwardRef(({icon,error,value,onChange,title,onEnter, onKeyDown, opcional = false,...props},ref)=>{
+export const  InputPassword = forwardRef(({icon,error,value,onChange,title,onEnter, onKeyDown, optional = false,...props},ref)=>{
     const [visible,setVisible] = useState(false)
     const [isCapsLockActive,setIsCapsLockActive] = useState(false)
   
@@ -63,7 +63,7 @@ export const  InputPassword = forwardRef(({icon,error,value,onChange,title,onEnt
         title &&
         <p className='input__title'>
           {title}
-          {!opcional && <Hint asterisk>Requerido</Hint>}
+          {!optional && <Hint asterisk>Requerido</Hint>}
         </p>
         
       }
