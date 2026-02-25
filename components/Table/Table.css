@@ -129,6 +129,7 @@
 }
 
 .elio-react-components.Table .Table__data__actions {
+  justify-content: flex-end;
   display: flex;
   align-items: center;
   gap: 1rem;

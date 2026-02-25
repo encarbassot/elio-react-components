@@ -28,7 +28,7 @@ export default function InputPhone({
   onEnter,
   onKeyDown,
   defaultCode="+34",
-  optional=false,
+  optional=true,
   hint="",
   ...props
 }) {

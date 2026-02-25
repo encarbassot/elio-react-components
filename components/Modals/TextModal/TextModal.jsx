@@ -1,6 +1,7 @@
 import "./TextModal.css";
 import { Modal } from "../Modal/Modal";
-import ico_close from "../../../assets/icons/cancel.svg"
+import ico_close from "../../../assets/icons/cancel.svg";
+import { useTranslation } from 'react-i18next';
 
 export function TextModal({
   title,
@@ -13,10 +14,14 @@ export function TextModal({
   cancelarRed,
   aceptarLoading=false,
   cancelarLoading=false,
-  aceptarText="ACEPTAR",
-  cancelarText="CANCELAR",
+  aceptarText=undefined,
+  cancelarText=undefined,
   buttons=[]
 }) {
+
+  const { t } = useTranslation()
+  const resolvedAceptarText = aceptarText ?? t('common.accept')
+  const resolvedCancelarText = cancelarText ?? t('common.cancel')
 
   const isLoading = aceptarLoading || cancelarLoading || buttons.some(x=>x.loading)
 
@@ -64,7 +69,7 @@ export function TextModal({
                     {aceptarLoading ?
                     <span className="spinner small"/>
                     :
-                    aceptarText
+                    resolvedAceptarText
                     }
                   </button>
                 )
@@ -75,7 +80,7 @@ export function TextModal({
                   {cancelarLoading ?
                   <span className="spinner small"/>
                   :
-                  cancelarText
+                  resolvedCancelarText
                   }
                     </button>
                 )

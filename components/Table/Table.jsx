@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import "./Table.css"
 //import {} from "../../assets/"
 
@@ -57,6 +57,8 @@ export function Table({
   onConfig,
   onClickRow,
 
+  customActions = [], // [{icon: , callback: (element)=>{}}]
+
   sortingColumn : _sortingColumn = undefined,
   sortingDirection : _sortingDirection = "ASC", // or "DESC"
 }) {
@@ -76,7 +78,8 @@ export function Table({
   const [sortingColumn, setSortingColumn] = useState(_sortingColumn)
   const [sortingDirection, setSortingDirection] = useState(_sortingDirection === "ASC")
 
-  const hasActions = Boolean(onDelete) || Boolean(onUpdate) || Boolean(onAccept) || Boolean(onCancel) || Boolean(onConfig)
+  const hasActions = Boolean(onDelete) || Boolean(onUpdate) || Boolean(onAccept) || Boolean(onCancel) || Boolean(onConfig) ||
+    (typeof customActions === 'function' || customActions.length > 0)
 
   if(headers.length!==columnWidths.length){
     console.warn("TABLE: columns and headers must be same length")
@@ -210,26 +213,19 @@ export function Table({
   }
 
 
-  function handleAccept(elem,i){
-    onAccept && onAccept(elem,i)
-  }
+  const builtinActions = useMemo(() => [
+    onAccept && { icon: icoConfirm, callback: onAccept },
+    onCancel && { icon: icoCancel,  callback: onCancel },
+    onUpdate && { icon: icoEdit,    callback: onUpdate },
+    onDelete && { icon: icoTrash,   callback: onDelete },
+    onConfig && { icon: icoConfig,  callback: onConfig },
+  ].filter(Boolean), [onAccept, onCancel, onUpdate, onDelete, onConfig])
 
-  function handleCancel(elem,i){
-    onCancel && onCancel(elem,i)
+  function handleCallback(callback, element, i){
+    if(typeof callback === "function"){
+      callback(element, i)
+    }
   }
-
-  function handleUpdate(elem,i){
-    onUpdate && onUpdate(elem,i)
-  }
-
-  function handleDelete(elem,i){
-    onDelete && onDelete(elem,i)
-  }
-
-  function handleConfig(elem,i){
-    onConfig && onConfig(elem,i)
-  }
-
 
   function handleChangeSortingColumn(n){
     if(sortingColumn === n){
@@ -377,13 +373,23 @@ export function Table({
                       }
 
                       {
-                        hasActions &&<td className="Table__data__actions">
-                          {onAccept && <button onClick={()=>handleAccept(element,i)}><img src={icoConfirm} /></button>}
-                          {onCancel && <button onClick={()=>handleCancel(element,i)}><img src={icoCancel} /></button>}
-                          {onUpdate && <button onClick={()=>handleUpdate(element,i)}><img src={icoEdit} /></button>}
-                          {onDelete && <button onClick={()=>handleDelete(element,i)}><img src={icoTrash} /></button>}
-                          {onConfig && <button onClick={()=>handleConfig(element,i)}><img src={icoConfig} /></button>}
-                        </td>
+                        hasActions && (() => {
+                          const resolvedCustom = typeof customActions === 'function'
+                            ? customActions(element)
+                            : customActions
+
+                          const allActions = [...resolvedCustom, ...builtinActions]
+
+                          return (
+                            <td className="Table__data__actions">
+                              {allActions.map(({ icon, callback, isLoading, disabled }, k) => (
+                                <button key={k} onClick={() => handleCallback(callback,element, i)} disabled={isLoading || disabled}>
+                                  {isLoading ? <span className="spinner small black"/> : <img src={icon} />}
+                                </button>
+                              ))}
+                            </td>
+                          )
+                        })()
                       }
                   </tr>
                 )
