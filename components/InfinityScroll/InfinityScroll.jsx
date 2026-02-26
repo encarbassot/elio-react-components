@@ -176,7 +176,7 @@ export default function InfinityScroll({
 
     const totalPages = totalPagesRef.current
     const canFetch = pageRef.current+1 <= totalPages && pageRef.current+1 > pageRef.current
-    console.log("CAN FETCH",canFetch,pageRef.current+1,totalPages)
+    // console.log("CAN FETCH",canFetch,pageRef.current+1,totalPages)
     if(!(!fetchUrl || isFetching || !internalHasMore) && canFetch){
       fetchData(pageRef.current+1)
     }

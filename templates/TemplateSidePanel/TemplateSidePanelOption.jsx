@@ -1,5 +1,4 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import log from "../../../utils/log"
 import React, { useEffect, useState } from "react"
 import { ROUTES } from "../../../routes/navigationConfig"
 
@@ -58,11 +57,11 @@ export default function SidePanelOption({ico,text,path,expanded,onClick, options
     if (option.path) {
       const newPath = getSubOptionHref(option);
       
-      console.log("Navigating to:", newPath); // Log before navigating
+      // log("Navigating to:", newPath); // Log before navigating
       navigate(newPath);
       
       setTimeout(() => {
-        console.log("Current location:", window.location.pathname);
+        // log("Current location:", window.location.pathname);
       }, 500); // Delay to verify
     }
   
