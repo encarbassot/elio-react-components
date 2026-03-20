@@ -11,36 +11,98 @@ import icoUp from "../../assets/icons/triangleUp.svg"
 import icoDown from "../../assets/icons/triangleDown.svg"
 import { InputText } from "../inputs/InputText/InputText";
 
+
+
 /*
-TODO - columnBehaviors
-Simplificar la logica de headers, elementsToArray, columnWidths y columnCallbacks a un solo array
 
-[
-  {
-    mode: "editable", // or "static" or "interactive"
-    render: (element, rowIndex) => <span>{element.name}</span>,
-    editor: {
-      type: "InputText", // could be dropdown, datepicker, etc.
-      onCommit: (row, key, newValue) => {}
-    }
-  },
-  {
-    mode: "interactive",
-    render: (element, rowIndex) => (
-      <StatusIcon isActive={element.enabled} />
-    ),
-    onClick: (row, key) => toggleStatus(row)
-  }
-]
+▗▄▄▄▖▗▖  ▗▖ ▗▄▖ ▗▖  ▗▖▗▄▄▖ ▗▖   ▗▄▄▄▖     ▗▄▖ ▗▄▄▄▖    ▗▖ ▗▖ ▗▄▄▖▗▄▄▄▖
+▐▌    ▝▚▞▘ ▐▌ ▐▌▐▛▚▞▜▌▐▌ ▐▌▐▌   ▐▌       ▐▌ ▐▌▐▌       ▐▌ ▐▌▐▌   ▐▌   
+▐▛▀▀▘  ▐▌  ▐▛▀▜▌▐▌  ▐▌▐▛▀▘ ▐▌   ▐▛▀▀▘    ▐▌ ▐▌▐▛▀▀▘    ▐▌ ▐▌ ▝▀▚▖▐▛▀▀▘
+▐▙▄▄▖▗▞▘▝▚▖▐▌ ▐▌▐▌  ▐▌▐▌   ▐▙▄▄▖▐▙▄▄▖    ▝▚▄▞▘▐▌       ▝▚▄▞▘▗▄▄▞▘▐▙▄▄▖
 
+const workspaces = [
+    { name: "Workspace 1", amount: 10, status: "active",  enabled: true  },
+    { name: "Workspace 2", amount: 5,  status: "inactive",enabled: false },
+    { name: "Workspace 3", amount: 8,  status: "active",  enabled: true  },
+  ]
+
+  return (<>
+    <div className="Page Workspaces">
+      <h1>Workspaces</h1>
+
+      <Table
+        elements={workspaces}
+
+        columns={[
+          {
+            label: "Name",
+            width: 2,
+            mode: "static",
+            render: (element) => element.name,
+          },
+          {
+            label: "Amount",
+            width: 1,
+            mode: "editable",
+            render: (element) => element.amount,
+            editor: {
+              type: "InputNumber",
+              onCommit: (element, value) => console.log("onCommit", element, value),
+            },
+          },
+          {
+            label: "Status",
+            width: 1,
+            mode: "interactive",
+            render: (element) => element.status,
+            onClick: (element) => console.log("toggle", element),
+          },
+          {
+            label: "Label",
+            width: 1,
+            mode: "static",
+            render: (element) => element.enabled ? "Yes" : "No",
+          },
+        ]}
+
+        // styles
+        // compact
+        // striped
+        // borders
+        // autoY
+
+        // sorting
+        sortingColumn={0}
+        sortingDirection="ASC"
+
+        // built-in row actions
+        // onAccept={(element) => console.log("onAccept", element)}
+        // onCancel={(element) => console.log("onCancel", element)}
+        // onUpdate={(element) => console.log("onUpdate", element)}
+        // onDelete={(element) => console.log("onDelete", element)}
+        // onConfig={(element) => console.log("onConfig", element)}
+
+        // custom actions (per-row)
+        customActions={(element) => [
+          { icon: icoEye, callback: (el) => console.log("view", el), disabled: !element.enabled },
+        ]}
+
+        // row click
+        onClickRow={(event, index, element) => console.log("onClickRow", index, element)}
+      />
+
+    </div>
+  </>)
 */
 
+
 export function Table({
-  elements, //mandatory
-  headers,  //mandatory
+  elements,   // mandatory
+  columns,    // [{ label, width, mode, render, editor?, onClick? }]
+  // Legacy props (kept for backward compatibility, use columns instead)
+  headers,
   elementToArray,
-  columnWidths, // always integers, that means 1 => 1fr
-  // columnBehaviors,//TODO
+  columnWidths,
   columnCallbacks,
 
   //styles
@@ -63,36 +125,60 @@ export function Table({
   sortingDirection : _sortingDirection = "ASC", // or "DESC"
 }) {
 
-  if(!elements || !headers){
-    console.warn("TABLE: elements and headers are mandatory")
-    return <div className="Table">No elements or headers</div>
-  }
-
   const tableRef = useRef(null)
-
-  const [vcolumnWidths, setColumnWidths] = useState(columnWidths ? columnWidths : Array.from({length:headers.length}).fill(1));
-  const [isOnMargin,setIsOnMargin] = useState(false)
-
+  const [isOnMargin, setIsOnMargin] = useState(false)
   const [editingCell, setEditingCell] = useState(null)
-
   const [sortingColumn, setSortingColumn] = useState(_sortingColumn)
   const [sortingDirection, setSortingDirection] = useState(_sortingDirection === "ASC")
+
+  // Normalize columns from new unified API or legacy props
+  const resolvedColumns = useMemo(() => {
+    if (columns) return columns
+    if (!headers || !elementToArray) return []
+    const widths = columnWidths || Array.from({ length: headers.length }).fill(1)
+    return headers.map((label, i) => {
+      const cb = columnCallbacks?.[i]
+      let mode = "static"
+      let editor, onClick
+      if (cb?.type === "InputText" || cb?.type === "InputNumber") {
+        mode = "editable"
+        editor = { type: cb.type, onCommit: cb.callback }
+      } else if (cb?.type === "onClick") {
+        mode = "interactive"
+        onClick = cb.callback
+      }
+      return { label, width: widths[i] ?? 1, mode, render: (element, rowIndex) => elementToArray(element, rowIndex)[i], editor, onClick }
+    })
+  }, [columns, headers, elementToArray, columnWidths, columnCallbacks])
+
+  const [vcolumnWidths, setColumnWidths] = useState(
+    () => resolvedColumns.map(c => c.width ?? 1)
+  )
 
   const hasActions = Boolean(onDelete) || Boolean(onUpdate) || Boolean(onAccept) || Boolean(onCancel) || Boolean(onConfig) ||
     (typeof customActions === 'function' || customActions.length > 0)
 
-  if(headers.length!==columnWidths.length){
-    console.warn("TABLE: columns and headers must be same length")
+  const builtinActions = useMemo(() => [
+    onAccept && { icon: icoConfirm, callback: onAccept },
+    onCancel && { icon: icoCancel,  callback: onCancel },
+    onUpdate && { icon: icoEdit,    callback: onUpdate },
+    onDelete && { icon: icoTrash,   callback: onDelete },
+    onConfig && { icon: icoConfig,  callback: onConfig },
+  ].filter(Boolean), [onAccept, onCancel, onUpdate, onDelete, onConfig])
+
+  if (!elements || resolvedColumns.length === 0) {
+    console.warn("TABLE: elements and columns (or headers) are mandatory", {elements,columns})
+    return <div className="Table">No elements or headers</div>
   }
 
   if (sortingColumn !== undefined && typeof sortingColumn !== "number") {
     console.warn("TABLE: sortingColumn must be a number")
-  }else if (sortingColumn >= columnWidths.length || sortingColumn < 0) {
-    console.warn("TABLE: sortingColumn out of range");
+  } else if (sortingColumn >= resolvedColumns.length || sortingColumn < 0) {
+    console.warn("TABLE: sortingColumn out of range")
   }
 
   if (!(_sortingDirection === "ASC" || _sortingDirection === "DESC")) {
-    console.warn('TABLE: sortingDirection must be "ASC" or "DESC"');
+    console.warn('TABLE: sortingDirection must be "ASC" or "DESC"')
   }
 
 
@@ -152,7 +238,7 @@ export function Table({
 
     const pxFromMargin = 20
     const isOnLeftMargin = i !== 0 && distanceToLeftMargin <= pxFromMargin;
-    const isOnRightMargin = i !== headers.length - 1 && distanceToRightMargin <= pxFromMargin;
+    const isOnRightMargin = i !== resolvedColumns.length - 1 && distanceToRightMargin <= pxFromMargin;
     const isOnMargin = isOnLeftMargin || isOnRightMargin;
 
     const handleMouseMove = (moveEvent) => {
@@ -213,14 +299,6 @@ export function Table({
   }
 
 
-  const builtinActions = useMemo(() => [
-    onAccept && { icon: icoConfirm, callback: onAccept },
-    onCancel && { icon: icoCancel,  callback: onCancel },
-    onUpdate && { icon: icoEdit,    callback: onUpdate },
-    onDelete && { icon: icoTrash,   callback: onDelete },
-    onConfig && { icon: icoConfig,  callback: onConfig },
-  ].filter(Boolean), [onAccept, onCancel, onUpdate, onDelete, onConfig])
-
   function handleCallback(callback, element, i){
     if(typeof callback === "function"){
       callback(element, i)
@@ -238,35 +316,23 @@ export function Table({
 
 
   // sorts elements depending on the column selected and the direction
-  function sorter(a,b){
-    if(sortingColumn === undefined){
-      //pasive sorter, no sort
-      return 0
-    }
+  function sorter(a, b) {
+    if (sortingColumn === undefined) return 0
 
-    const elementA = elementToArray(a)[sortingColumn]
-    const elementB = elementToArray(b)[sortingColumn]
+    const elementA = resolvedColumns[sortingColumn].render(a)
+    const elementB = resolvedColumns[sortingColumn].render(b)
 
-    // Check if both values are numbers, if so, compare them numerically
-    const isNumberA = !isNaN(elementA);
-    const isNumberB = !isNaN(elementB);
+    const isNumberA = !isNaN(elementA)
+    const isNumberB = !isNaN(elementB)
 
     if (isNumberA && isNumberB) {
-      // If both are numbers, compare them numerically
-      return sortingDirection ? elementA - elementB : elementB - elementA;
+      return sortingDirection ? elementA - elementB : elementB - elementA
     }
 
-    // Convert to strings and compare both elements
-    const valueA = elementA ? elementA.toString() : ''; // to avoid null/undefined errors
-    const valueB = elementB ? elementB.toString() : ''; // to avoid null/undefined errors
+    const valueA = elementA ? elementA.toString() : ''
+    const valueB = elementB ? elementB.toString() : ''
 
-    if (sortingDirection) {
-      // If sorting direction is ASC
-      return valueA.localeCompare(valueB);
-    } else {
-      return valueB.localeCompare(valueA);
-    }
-
+    return sortingDirection ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA)
   }
 
   return (
@@ -275,102 +341,79 @@ export function Table({
         <table>
           <thead>
             <tr>
-              {headers.map((columnName,i)=>{
+              {resolvedColumns.map((col, i) => {
                 const widths = widthsPercent()
-
                 return (
-                <th
-                  key={i}
-                  className={"Table__header "+(isOnMargin?"resize":"")}
-                  onMouseDown={e => handleMouseDown(e,i)}
-                  onMouseOver={e=>handleMouseOver(e,i)}
-                  onClick={()=>handleChangeSortingColumn(i)}
-                  style={{width:widths[i]}}
-                >
-                  <div className="Table__header__container">
-                    <span>{columnName}</span>
-                    {
-                      sortingColumn === i &&
-                      <img className="sortingIco" src={
-                        sortingDirection ? icoDown : icoUp
-                      } />
-                    }
-                  </div>
-                </th>
-              )})}
-
+                  <th
+                    key={i}
+                    className={"Table__header " + (isOnMargin ? "resize" : "")}
+                    onMouseDown={e => handleMouseDown(e, i)}
+                    onMouseOver={e => handleMouseOver(e, i)}
+                    onClick={() => handleChangeSortingColumn(i)}
+                    style={{ width: widths[i] }}
+                  >
+                    <div className="Table__header__container">
+                      <span>{col.label}</span>
+                      {sortingColumn === i &&
+                        <img className="sortingIco" src={sortingDirection ? icoDown : icoUp} />
+                      }
+                    </div>
+                  </th>
+                )
+              })}
               {hasActions && <th/>}
             </tr>
           </thead>
           <tbody>
             {
-              elements.sort(sorter).map((element,i)=>{
-                const array = elementToArray(element,i)
-                return (
-                  <tr
-                    key={i}
-                    onClick={e=>handleOnClickRow(e,i,element)}
-                  >
-                      {
-                        headers.map((_,j)=>{
-                          const dataElement = array[j]
+              elements.sort(sorter).map((element, i) => (
+                <tr
+                  key={i}
+                  onClick={e => handleOnClickRow(e, i, element)}
+                >
+                  {resolvedColumns.map((col, j) => {
+                    const dataElement = col.render(element, i)
+                    const isInputNumber = col.mode === "editable" && col.editor?.type === "InputNumber"
+                    const isEditableInput = col.mode === "editable"
 
-                          const isInputNumber = columnCallbacks && columnCallbacks[j]?.type === "InputNumber"
-                          const isEditableInput = columnCallbacks && (columnCallbacks[j]?.type === "InputText" || isInputNumber)
+                    const handleSubmitEdit = async (value) => {
+                      if (!col.editor?.onCommit) return
+                      await col.editor.onCommit(element, value, j, i)
+                      setEditingCell(null)
+                    }
 
-                          const handleSubmitEdit = async (value, element, j, i) => {
-                            if (!columnCallbacks?.[j]) return
-                            await columnCallbacks[j].callback( element, value, j, i)
-                            setEditingCell(null)
-                          }
-
-                          return(
-                            <td key={"-"+i+"-"+j} onClick={e => {
-                              if (
-                                columnCallbacks &&
-                                columnCallbacks[j]?.type === "InputText" &&
-                                editingCell === null
-                              ) {
+                    return (
+                      <td key={"-" + i + "-" + j} onClick={e => {
+                        if (isEditableInput && editingCell === null) {
+                          e.stopPropagation()
+                          setEditingCell({ row: i, col: j, value: dataElement })
+                        }
+                      }}>
+                        {isEditableInput
+                          ? (editingCell?.row === i && editingCell?.col === j
+                            ? <InputText
+                                value={editingCell.value}
+                                onChange={e => setEditingCell({ ...editingCell, value: e.target.value })}
+                                onBlur={() => handleSubmitEdit(editingCell.value)}
+                                onEnter={() => handleSubmitEdit(editingCell.value)}
+                                onEsc={() => setEditingCell(null)}
+                                autoFocus
+                                typeNumber={isInputNumber}
+                                alignRight={isInputNumber}
+                              />
+                            : <span>{dataElement}</span>)
+                          : col.mode === "interactive"
+                            ? <span onClick={e => {
                                 e.stopPropagation()
-                                setEditingCell({ row: i, col: j, value: dataElement })
-                              }
-                            }}>                              
-                              {
-                                // INPUT TEXT LIKE
-                                columnCallbacks && isEditableInput
-                                // EDITING CURRENT CELL
-                                ? (editingCell?.row === i && editingCell?.col === j 
-                                  ? <InputText
-                                      value={editingCell.value}
-                                      onChange={e => setEditingCell({ ...editingCell, value: e.target.value })}
-
-                                      onBlur={() => handleSubmitEdit(editingCell.value, elements[i], j, i)}
-                                      onEnter={() => handleSubmitEdit(editingCell.value, elements[i], j, i)}
-
-                                      onEsc={()=> setEditingCell(null)}
-                                      autoFocus
-                                      typeNumber = {isInputNumber}
-                                      alignRight = {isInputNumber}
-                                      // title={headers[j]?.label || ""}
-                                    />
-                                    // NOT EDITING CURRENT CELL (input is shy waiting for click)
-                                  : <span>{dataElement}</span>)
-                                :
-                                // INPUT BUTTON LIKE
-                                columnCallbacks && columnCallbacks[j]?.type === "onClick"
-                                  ? <span onClick={e => {
-                                      e.stopPropagation()
-                                      columnCallbacks[j].callback(element, j, i)
-                                    }}>
-                                      {dataElement}
-                                    </span>
-                                // NO ACTION
-                                : dataElement
-                              }
-                            </td>
-                          )
-                        })
-                      }
+                                col.onClick?.(element, j, i)
+                              }}>
+                                {dataElement}
+                              </span>
+                            : dataElement
+                        }
+                      </td>
+                    )
+                  })}
 
                       {
                         hasActions && (() => {
@@ -382,18 +425,17 @@ export function Table({
 
                           return (
                             <td className="Table__data__actions">
-                              {allActions.map(({ icon, callback, isLoading, disabled }, k) => (
+                              {allActions.map(({ element, icon, callback, isLoading, disabled }, k) => (
                                 <button key={k} onClick={() => handleCallback(callback,element, i)} disabled={isLoading || disabled}>
-                                  {isLoading ? <span className="spinner small black"/> : <img src={icon} />}
+                                  {isLoading ? <span className="spinner small black"/> : element || <img src={icon} />}
                                 </button>
                               ))}
                             </td>
                           )
                         })()
                       }
-                  </tr>
-                )
-              })
+                </tr>
+              ))
             }
           </tbody>
         </table>

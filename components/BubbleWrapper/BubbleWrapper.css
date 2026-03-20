@@ -1,0 +1,89 @@
+/* ─── BubbleWrapper ─────────────────────────────────────────────────────────
+   Inline trigger + floating card portal.
+   Card structure: top / (left · anchor · right) / bottom
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Trigger (always-visible anchor wrapper) ─────────────────────────────── */
+.bw-trigger {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 10px;
+  padding: 0.35rem 0.7rem;
+  border: 1.5px dashed rgba(0, 0, 0, 0.22);
+  cursor: default;
+  transition: opacity 0.18s ease, border-color 0.18s ease;
+}
+
+/* Fade out while bubble is open — bubble's anchor-cell takes visual ownership */
+.bw-trigger--open {
+  opacity: 0;
+  border-color: transparent;
+  pointer-events: none;
+}
+
+/* ── Portal popup ─────────────────────────────────────────────────────────── */
+.bw-popup {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.07),
+    0 4px 10px -2px rgba(0, 0, 0, 0.10),
+    0 20px 48px -8px rgba(0, 0, 0, 0.18);
+
+  /* Hidden / enter base state — starts at anchor size */
+  opacity: 0;
+  transform: scale(var(--bw-sx, 0.5), var(--bw-sy, 0.5));
+  transform-origin: var(--bw-origin, 50% 50%);
+  transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.34, 1.28, 0.64, 1);
+}
+
+/* Fully open */
+.bw-popup--ready {
+  pointer-events: auto;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Closing — shrinks back to anchor size */
+.bw-popup--closing {
+  pointer-events: none !important;
+  opacity: 0;
+  transform: scale(var(--bw-sx, 0.5), var(--bw-sy, 0.5));
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* ── Middle row ───────────────────────────────────────────────────────────── */
+.bw-mid {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+
+/* ── Cells ────────────────────────────────────────────────────────────────── */
+.bw-cell {
+  padding: 0.65rem 0.9rem;
+}
+
+.bw-top    { border-bottom: 1px solid rgba(0, 0, 0, 0.07); }
+.bw-bottom { border-top:    1px solid rgba(0, 0, 0, 0.07); }
+.bw-left   { border-right:  1px solid rgba(0, 0, 0, 0.07); }
+.bw-right  { border-left:   1px solid rgba(0, 0, 0, 0.07); }
+
+/* Anchor cell mirrors the trigger's padding exactly so sizes always match */
+.bw-anchor-cell {
+  flex: 1;
+  min-width: 0;
+  padding: 0.35rem 0.7rem;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.018); /* subtle tint — focal-point hint */
+}
