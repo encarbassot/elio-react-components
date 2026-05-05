@@ -1,0 +1,54 @@
+{
+  "name": "@encarbassot/elio-react-components",
+  "version": "0.1.0",
+  "description": "Open-source React component library — customizable, themeable, and composable.",
+  "author": "Eloi Fàbrega <eloikiwi@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/encarbassot/elio-react-components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/encarbassot/elio-react-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/encarbassot/elio-react-components/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "library",
+    "themeable",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/styles/base.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "tsup": "^8",
+    "typescript": "^5"
+  }
+}
