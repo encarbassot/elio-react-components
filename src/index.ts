@@ -1,6 +1,8 @@
 // ── elio-inputs (new, reviewed) ──────────────────────────────────────────────
 export { InputDropdown } from '../components/elio-inputs/InputDropdown'
 export type { InputDropdownProps, DropdownOption } from '../components/elio-inputs/InputDropdown'
+export { TextEditor } from '../components/elio-inputs/TextEditor'
+export type { TextEditorProps, ToolbarMode } from '../components/elio-inputs/TextEditor'
 
 // Components
 export { BouncingDots } from '../components/BouncingDots/BouncingDots'

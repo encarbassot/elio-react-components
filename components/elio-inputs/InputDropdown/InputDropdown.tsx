@@ -1,6 +1,5 @@
-çimport { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
-import './InputDropdown.css'
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -24,9 +23,9 @@ export interface InputDropdownProps<V = string> {
   hint?: string
 
   // Feature flags
-  searchable?: boolean     // filter options by typing
-  clearable?: boolean      // show ✕ to reset value
-  pinnable?: boolean       // star/pin options to top
+  searchable?: boolean
+  clearable?: boolean
+  pinnable?: boolean
 
   // Controlled pins (optional — uncontrolled if omitted)
   pinnedValues?: V[]
@@ -37,6 +36,9 @@ export interface InputDropdownProps<V = string> {
     opt: DropdownOption<V>,
     meta: { pinned: boolean; selected: boolean; focused: boolean }
   ) => React.ReactNode
+
+  // Panel position
+  direction?: 'down' | 'up'
 
   // Root element
   className?: string
@@ -63,6 +65,7 @@ export function InputDropdown<V = string>({
   pinnedValues: controlledPinned,
   onPinChange,
   renderOption,
+  direction = 'down',
   className,
   style,
 }: InputDropdownProps<V>) {
@@ -88,11 +91,19 @@ export function InputDropdown<V = string>({
     return () => document.removeEventListener('mousedown', handler)
   }, [open])
 
-  // Focus search input when dropdown opens
+  // Sync focusedIdx to selected item and move focus into the panel when dropdown opens
   useEffect(() => {
-    if (open && searchable) requestAnimationFrame(() => searchRef.current?.focus())
-    if (!open) { setQuery(''); setFocusedIdx(0) }
-  }, [open, searchable])
+    if (open) {
+      const idx = filtered.findIndex(o => o.value === value)
+      setFocusedIdx(idx >= 0 ? idx : 0)
+      requestAnimationFrame(() => {
+        if (searchable) searchRef.current?.focus()
+        else listRef.current?.focus()
+      })
+    } else {
+      setQuery('')
+    }
+  }, [open])
 
   // Scroll focused option into view
   useEffect(() => {
@@ -174,82 +185,110 @@ export function InputDropdown<V = string>({
 
   // ── Render ────────────────────────────────────────────────────────────────
 
-  const rootClass = [
-    'elio-dropdown',
-    disabled && 'elio-dropdown--disabled',
-    open      && 'elio-dropdown--open',
-    error     && 'elio-dropdown--error',
-    className,
-  ].filter(Boolean).join(' ')
+  const triggerBorder = error ? 'border-elio-danger' : open ? 'border-elio-primary/25' : 'border-elio-border hover:border-elio-primary/25'
 
   return (
-    <div ref={rootRef} className={rootClass} style={style}>
+    <div
+      ref={rootRef}
+      style={style}
+      className={[
+        'relative inline-flex flex-col gap-1 font-[inherit] text-[13px] text-elio-text min-w-[120px]',
+        disabled && 'opacity-50 pointer-events-none',
+        className,
+      ].filter(Boolean).join(' ')}
+    >
 
       {label && (
-        <label className="elio-dropdown__label">{label}</label>
+        <label className="text-[11px] text-elio-muted tracking-[0.04em]">
+          {label}
+        </label>
       )}
 
       {/* Trigger */}
       <button
         ref={triggerRef}
         type="button"
-        className="elio-dropdown__trigger"
         onClick={() => !disabled && setOpen(v => !v)}
         onKeyDown={handleTriggerKeyDown}
         disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={open}
+        className={[
+          'flex items-center gap-1.5 w-full',
+          'bg-elio-surface border rounded-[3px]',
+          'text-elio-text font-[inherit] text-[inherit]',
+          'px-2.5 py-[7px] cursor-pointer text-left',
+          'transition-colors outline-none',
+          'focus-visible:border-elio-primary/25 focus-visible:shadow-[0_0_0_2px_theme(colors.elio-primary/8)]',
+          triggerBorder,
+        ].join(' ')}
       >
-        <span className="elio-dropdown__value">
+        <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
           {selectedOption
             ? selectedOption.label
-            : <span className="elio-dropdown__placeholder">{placeholder}</span>
+            : <span className="text-elio-muted">{placeholder}</span>
           }
         </span>
 
         {clearable && value != null && (
           <span
-            className="elio-dropdown__clear"
             onClick={clear}
             role="button"
             aria-label="Clear selection"
             tabIndex={-1}
+            className="text-elio-muted text-[11px] shrink-0 cursor-pointer px-0.5 transition-colors hover:text-elio-danger"
           >
             ✕
           </span>
         )}
 
-        <span className="elio-dropdown__arrow" aria-hidden>▾</span>
+        <span
+          aria-hidden
+          className={[
+            'text-elio-muted text-[11px] shrink-0 transition-transform',
+            open && 'rotate-180',
+          ].filter(Boolean).join(' ')}
+        >
+          ▾
+        </span>
       </button>
 
-      {/* Dropdown panel */}
+      {/* Panel */}
       {open && (
-        <div className="elio-dropdown__panel" role="listbox">
+        <div
+          role="listbox"
+          className={[
+            'absolute left-0 right-0 z-[100] bg-elio-surface border border-elio-border rounded-[3px] shadow-[0_8px_24px_rgba(0,0,0,0.4)] overflow-hidden',
+            direction === 'up' ? 'bottom-[calc(100%+4px)]' : 'top-[calc(100%+4px)]',
+          ].join(' ')}
+        >
 
           {searchable && (
-            <div className="elio-dropdown__search-wrap">
+            <div className="p-2 pb-1.5 border-b border-elio-border">
               <input
                 ref={searchRef}
                 type="text"
-                className="elio-dropdown__search"
                 value={query}
                 onChange={e => { setQuery(e.target.value); setFocusedIdx(0) }}
                 onKeyDown={handleSearchKeyDown}
                 placeholder="Search…"
                 aria-label="Search options"
+                className="w-full bg-elio-raised border border-elio-border rounded-[2px] text-elio-text font-[inherit] text-[12px] px-2 py-[5px] outline-none transition-colors focus:border-elio-primary/25 placeholder:text-elio-muted"
               />
             </div>
           )}
 
           <ul
             ref={listRef}
-            className="elio-dropdown__list"
             tabIndex={searchable ? -1 : 0}
             onKeyDown={!searchable ? handleListKeyDown : undefined}
             aria-label={label}
+            className="list-none m-0 p-0 max-h-[220px] overflow-y-auto outline-none [scrollbar-width:thin] [scrollbar-color:theme(colors.elio-border)_transparent]"
           >
             {filtered.length === 0 && (
-              <li className="elio-dropdown__empty">No options</li>
+              <li className="px-3 py-3 text-[12px] text-elio-muted text-center">
+                No options
+              </li>
             )}
 
             {filtered.map((opt, i) => {
@@ -257,36 +296,44 @@ export function InputDropdown<V = string>({
               const isPinned   = pinned.includes(opt.value)
               const isFocused  = i === focusedIdx
 
-              const itemClass = [
-                'elio-dropdown__option',
-                isSelected   && 'elio-dropdown__option--selected',
-                isFocused    && 'elio-dropdown__option--focused',
-                isPinned     && 'elio-dropdown__option--pinned',
-                opt.disabled && 'elio-dropdown__option--disabled',
-              ].filter(Boolean).join(' ')
-
               return (
                 <li
                   key={String(opt.value)}
-                  className={itemClass}
                   onClick={() => select(opt)}
                   onMouseEnter={() => setFocusedIdx(i)}
                   role="option"
                   aria-selected={isSelected}
                   aria-disabled={opt.disabled}
+                  className={[
+                    'flex items-center gap-2 px-3 py-2 cursor-pointer select-none transition-colors',
+                    'group',
+                    isSelected ? 'text-elio-primary' : 'text-elio-muted',
+                    (isFocused || (!isSelected && false)) && 'bg-elio-primary/8 text-elio-text',
+                    isFocused && 'bg-elio-primary/8 text-elio-text',
+                    isPinned && 'border-l-2 border-elio-primary/25 pl-2.5',
+                    opt.disabled && 'opacity-40 cursor-not-allowed pointer-events-none',
+                  ].filter(Boolean).join(' ')}
                 >
                   {renderOption
                     ? renderOption(opt, { pinned: isPinned, selected: isSelected, focused: isFocused })
-                    : <span className="elio-dropdown__option-label">{opt.label}</span>
+                    : (
+                      <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
+                        {isSelected && <span className="text-[11px]">✓ </span>}
+                        {opt.label}
+                      </span>
+                    )
                   }
 
                   {pinnable && (
                     <button
                       type="button"
-                      className={`elio-dropdown__pin${isPinned ? ' elio-dropdown__pin--active' : ''}`}
                       onClick={e => togglePin(e, opt.value)}
                       aria-label={isPinned ? 'Unpin' : 'Pin to top'}
                       tabIndex={-1}
+                      className={[
+                        'bg-transparent border-none cursor-pointer text-[14px] px-0.5 leading-none shrink-0 transition-[opacity,color]',
+                        isPinned ? 'opacity-100 text-[#f5c518]' : 'opacity-0 text-elio-muted group-hover:opacity-100',
+                      ].join(' ')}
                     >
                       {isPinned ? '★' : '☆'}
                     </button>
@@ -298,8 +345,8 @@ export function InputDropdown<V = string>({
         </div>
       )}
 
-      {hint  && !error && <span className="elio-dropdown__hint">{hint}</span>}
-      {error && <span className="elio-dropdown__error">{error}</span>}
+      {hint  && !error && <span className="text-[11px] text-elio-muted">{hint}</span>}
+      {error && <span className="text-[11px] text-elio-danger">{error}</span>}
 
     </div>
   )

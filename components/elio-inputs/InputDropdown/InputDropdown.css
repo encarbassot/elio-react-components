@@ -104,9 +104,9 @@
 }
 .elio-dropdown--open .elio-dropdown__arrow { transform: rotate(180deg); }
 
-/* ── Dropdown ── */
+/* ── Panel ── */
 
-.elio-dropdown__dropdown {
+.elio-dropdown__panel {
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
