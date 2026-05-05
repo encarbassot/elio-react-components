@@ -1,6 +1,6 @@
 // ── elio-inputs (new, reviewed) ──────────────────────────────────────────────
-export { EliSelect } from '../components/elio-inputs/EliSelect'
-export type { EliSelectProps, SelectOption } from '../components/elio-inputs/EliSelect'
+export { InputDropdown } from '../components/elio-inputs/InputDropdown'
+export type { InputDropdownProps, DropdownOption } from '../components/elio-inputs/InputDropdown'
 
 // Components
 export { BouncingDots } from '../components/BouncingDots/BouncingDots'

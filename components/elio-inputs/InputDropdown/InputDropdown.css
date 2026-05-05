@@ -1,0 +1,239 @@
+/* ── EliSelect ──────────────────────────────────────────────────────────────
+   All colors / radii / fonts via --elio-* variables.
+   Override at :root or on .elio-dropdown directly for per-instance theming.
+   ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --elio-primary:        #7fff7f;
+  --elio-primary-dim:    rgba(127, 255, 127, 0.12);
+  --elio-primary-border: rgba(127, 255, 127, 0.35);
+  --elio-danger:         #ff6b6b;
+  --elio-bg:             #ffffff;
+  --elio-surface:        #f5f5f5;
+  --elio-surface-raised: #ebebeb;
+  --elio-border:         #d0d0d0;
+  --elio-text:           #111111;
+  --elio-text-muted:     #888888;
+  --elio-radius:         4px;
+  --elio-radius-sm:      2px;
+  --elio-font:           ui-sans-serif, system-ui, sans-serif;
+  --elio-transition:     0.12s ease;
+}
+
+/* ── Root ── */
+
+.elio-dropdown {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--elio-font);
+  font-size: 13px;
+  color: var(--elio-text);
+  min-width: 120px;
+}
+
+.elio-dropdown--disabled { opacity: 0.5; pointer-events: none; }
+
+/* ── Label ── */
+
+.elio-dropdown__label {
+  font-size: 11px;
+  color: var(--elio-text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ── Trigger button ── */
+
+.elio-dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  background: var(--elio-surface);
+  border: 1px solid var(--elio-border);
+  border-radius: var(--elio-radius);
+  color: var(--elio-text);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 7px 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--elio-transition);
+  outline: none;
+}
+
+.elio-dropdown__trigger:hover,
+.elio-dropdown--open .elio-dropdown__trigger {
+  border-color: var(--elio-primary-border);
+}
+
+.elio-dropdown__trigger:focus-visible {
+  border-color: var(--elio-primary-border);
+  box-shadow: 0 0 0 2px var(--elio-primary-dim);
+}
+
+.elio-dropdown--error .elio-dropdown__trigger {
+  border-color: var(--elio-danger);
+}
+
+.elio-dropdown__value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.elio-dropdown__placeholder { color: var(--elio-text-muted); }
+
+.elio-dropdown__clear {
+  color: var(--elio-text-muted);
+  font-size: 11px;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 0 2px;
+  transition: color var(--elio-transition);
+}
+.elio-dropdown__clear:hover { color: var(--elio-danger); }
+
+.elio-dropdown__arrow {
+  color: var(--elio-text-muted);
+  font-size: 11px;
+  flex-shrink: 0;
+  transition: transform var(--elio-transition);
+}
+.elio-dropdown--open .elio-dropdown__arrow { transform: rotate(180deg); }
+
+/* ── Dropdown ── */
+
+.elio-dropdown__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--elio-surface);
+  border: 1px solid var(--elio-border);
+  border-radius: var(--elio-radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+/* ── Search ── */
+
+.elio-dropdown__search-wrap {
+  padding: 8px 8px 6px;
+  border-bottom: 1px solid var(--elio-border);
+}
+
+.elio-dropdown__search {
+  width: 100%;
+  background: var(--elio-surface-raised);
+  border: 1px solid var(--elio-border);
+  border-radius: var(--elio-radius-sm);
+  color: var(--elio-text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 5px 8px;
+  outline: none;
+  transition: border-color var(--elio-transition);
+}
+
+.elio-dropdown__search:focus { border-color: var(--elio-primary-border); }
+.elio-dropdown__search::placeholder { color: var(--elio-text-muted); }
+
+/* ── List ── */
+
+.elio-dropdown__list {
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--elio-border) transparent;
+  outline: none;
+}
+
+.elio-dropdown__empty {
+  padding: 12px 12px;
+  font-size: 12px;
+  color: var(--elio-text-muted);
+  text-align: center;
+}
+
+/* ── Option ── */
+
+.elio-dropdown__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--elio-text-muted);
+  transition: background var(--elio-transition), color var(--elio-transition);
+  user-select: none;
+}
+
+.elio-dropdown__option:hover,
+.elio-dropdown__option--focused {
+  background: var(--elio-primary-dim);
+  color: var(--elio-text);
+}
+
+.elio-dropdown__option--selected {
+  color: var(--elio-primary);
+}
+
+.elio-dropdown__option--selected .elio-dropdown__option-label::before {
+  content: '✓ ';
+  font-size: 11px;
+}
+
+.elio-dropdown__option--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.elio-dropdown__option--pinned {
+  border-left: 2px solid var(--elio-primary-border);
+  padding-left: 10px;
+}
+
+.elio-dropdown__option-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Pin button ── */
+
+.elio-dropdown__pin {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--elio-text-muted);
+  font-size: 14px;
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--elio-transition), color var(--elio-transition);
+}
+
+.elio-dropdown__option:hover .elio-dropdown__pin,
+.elio-dropdown__pin--active { opacity: 1; }
+
+.elio-dropdown__pin--active { color: #f5c518; }
+
+/* ── Hint / Error ── */
+
+.elio-dropdown__hint {
+  font-size: 11px;
+  color: var(--elio-text-muted);
+}
+
+.elio-dropdown__error {
+  font-size: 11px;
+  color: var(--elio-danger);
+}
